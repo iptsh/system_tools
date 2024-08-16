@@ -10,4 +10,4 @@
 
 #### 或者
 
-#### wget https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && chmod +x ./system_tools.sh && ./system_tools.sh
+#### wget --no-cache https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && chmod +x ./system_tools.sh && ./system_tools.sh
