@@ -486,7 +486,8 @@ view_change_log() {
     show_progress "查看更新日志"
 
     echo -e "${YELLOW}正在从远程URL获取更新日志...${NC}"
-    curl -s "$CHANGE_LOG_URL" | while IFS= read -r line; do
+    # 添加 '-H "Cache-Control: no-cache"' 以强制刷新缓存
+    curl -s -H "Cache-Control: no-cache" "$CHANGE_LOG_URL" | while IFS= read -r line; do
         echo "$line"
     done
 
