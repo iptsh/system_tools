@@ -61,7 +61,7 @@ set_shortcut
 show_menu() {
     clear
     echo -e "${BLUE}------------------------------------------------------------${NC}"
-    echo -e "【${RED}系统工具合集${NC}】${YELLOW}${VERSION}${NC}【${RED}System Tools${NC}】"
+    echo -e "【${RED}系统工具合集${NC}】${YELLOW}${VERSION}${NC}【${GREEN}System Tools${NC}】"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${YELLOW}捷径${NC}】${WHITE}通过键盘快捷键 ${YELLOW}s${WHITE}（小写字母）可快速启动并进入脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
