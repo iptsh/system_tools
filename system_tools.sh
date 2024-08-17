@@ -84,7 +84,7 @@ show_menu() {
 manage_screen() {
     if ! command -v screen &> /dev/null; then
         echo -e "【${RED}screen 工具未安装${NC}】"
-        read -p "【${YELLOW}是否立即安装 screen 工具？（y/n）${NC}】" install_choice
+        read -p "$(echo -e "【${YELLOW}是否立即安装 screen 工具？（y/n）${NC}】")" install_choice
         if [[ "$install_choice" == "y" || "$install_choice" == "Y" ]]; then
             sudo apt-get update && sudo apt-get install -y screen
             echo -e "【${GREEN}screen 工具已成功安装${NC}】"
@@ -102,7 +102,7 @@ manage_screen() {
         echo -e "【${BLUE}5${NC}】 ${BLUE}删除会话${NC}"
         echo -e "【${BLUE}q${NC}】 ${BLUE}返回主菜单${NC}"
 
-        read -p "【${RED}请输入选项${NC}】" screen_choice
+        read -p "$(echo -e "【${RED}请输入选项${NC}】")" session_name
 
         case $screen_choice in
             1)
@@ -114,7 +114,7 @@ manage_screen() {
                 fi
                 ;;
             2)
-                read -p "【${RED}请输入新会话名称${NC}】" session_name
+                read -p "$(echo -e "【${RED}请输入会话名称${NC}】")" session_name
                 screen -S "$session_name"
                 ;;
             3)
@@ -128,7 +128,7 @@ manage_screen() {
                 else
                     echo -e "【${BLUE}选择要恢复的会话${NC}】"
                     screen -ls
-                    read -p "【${RED}请输入会话名称${NC}】" session_name
+                    read -p "$(echo -e "【${RED}请输入会话名称${NC}】")" session_name
                     screen -r "$session_name"
                 fi
                 ;;
@@ -139,7 +139,7 @@ manage_screen() {
                 else
                     echo -e "【${BLUE}选择要删除的会话${NC}】"
                     screen -ls
-                    read -p "【${RED}请输入会话名称${NC}】" session_name
+                    read -p "$(echo -e "【${RED}请输入会话名称${NC}】")" session_name
                     screen -S "$session_name" -X quit
                     echo -e "【${GREEN}会话 ${session_name} 已删除${NC}】"
                 fi
