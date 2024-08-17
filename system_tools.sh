@@ -632,6 +632,7 @@ while true; do
     show_menu
     # 使用红色提示用户输入选项编号
     echo -ne "【${BLUE}输入选项编号并按回车确认${NC}】"
+    echo -e "${BLUE}------------------------------------------------------------${NC}"
     read choice
     case $choice in
         1)
