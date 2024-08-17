@@ -61,9 +61,11 @@ set_shortcut
 show_menu() {
     clear
     echo -e "${BLUE}------------------------------------------------------------${NC}"
-    echo -e "【${RED}系统工具合集${NC}】${YELLOW}${VERSION}${NC}【${GREEN}System Tools${NC}】【${WHITE}作者网站 ${YELLOW}https://scarsong.com ${NC}】"
+    echo -e "【${RED}系统工具合集${NC}】${YELLOW}${VERSION}${NC}【${GREEN}System Tools${NC}】"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
-    echo -e "【${YELLOW}捷径${NC}】${WHITE}通过键盘快捷键 ${YELLOW}s${WHITE}（小写字母）可快速启动并进入脚本${NC}"
+    echo -e "【${WHITE}作者网站】【${YELLOW}https://scarsong.com ${NC}】"
+    echo -e "${BLUE}------------------------------------------------------------${NC}"
+    echo -e "【${YELLOW}捷径${NC}】${WHITE}通过快捷键 ${YELLOW}s${WHITE} 可快速启动脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${BLUE}1${NC}】 ${BLUE}管理${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}输入链规则${NC}"
     echo -e "【${BLUE}2${NC}】 ${BLUE}管理服务器${YELLOW} SSH ${BLUE}防火墙规则${NC}"
