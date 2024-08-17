@@ -540,7 +540,7 @@ update_script() {
     show_progress "【${GREEN}更新脚本${NC}】"
 
     # 第一步：下载远程脚本到临时文件
-    echo -e "【${RED}正在从远程${YELLOW} URL ${RED}检测最新版本的脚本${NC}】"
+    echo -e "【${RED}正在从远程${YELLOW} URL ${RED}检测最新版本的脚本${NC}】【${YELLOW}已下载远程脚本到临时文件${NC}】"
     curl -o "/tmp/temp_script.sh" "$REMOTE_SCRIPT_URL"
 
     # 第二步：比对临时文件和当前脚本
@@ -557,7 +557,7 @@ update_script() {
                 # 使用 curl 直接下载并更新脚本
                 curl -O "$REMOTE_SCRIPT_URL" && \
                 chmod +x ./system_tools.sh && \
-                echo -e "【${GREEN}脚本已成功更新，正在重新启动...${NC}】" && \
+                echo -e "【${GREEN}脚本已成功更新，正在重新启动${NC}】" && \
                 ./system_tools.sh  # 重新启动脚本
                 exit 0
                 ;;
