@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 定义版本号
+VERSION="v1.3"
+
 # 定义颜色
 BLUE='\033[96m'       # 浅蓝色
 YELLOW='\033[93m'     # 金黄色
@@ -57,7 +60,7 @@ set_shortcut
 # 显示菜单函数
 show_menu() {
     clear
-    echo -e "【${RED}系统工具合集${NC}】 ${YELLOW}v1.2${NC}"
+    echo -e "【${RED}系统工具合集${NC}】 ${YELLOW}${VERSION}${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${YELLOW}捷径${NC}】${WHITE}通过键盘快捷键 ${YELLOW}s${WHITE}（小写字母）可快速启动并进入脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
@@ -99,7 +102,7 @@ manage_screen() {
         echo -e "【${BLUE}5${NC}】 ${BLUE}删除会话${NC}"
         echo -e "【${BLUE}q${NC}】 ${BLUE}返回主菜单${NC}"
 
-        read -p "【请输入选项】" screen_choice
+        read -p "【${RED}请输入选项${NC}】" screen_choice
 
         case $screen_choice in
             1)
@@ -111,7 +114,7 @@ manage_screen() {
                 fi
                 ;;
             2)
-                read -p "【请输入新会话名称】" session_name
+                read -p "【${RED}请输入新会话名称${NC}】" session_name
                 screen -S "$session_name"
                 ;;
             3)
@@ -125,7 +128,7 @@ manage_screen() {
                 else
                     echo -e "【${BLUE}选择要恢复的会话${NC}】"
                     screen -ls
-                    read -p "【请输入会话名称】" session_name
+                    read -p "【${RED}请输入会话名称${NC}】" session_name
                     screen -r "$session_name"
                 fi
                 ;;
@@ -136,7 +139,7 @@ manage_screen() {
                 else
                     echo -e "【${BLUE}选择要删除的会话${NC}】"
                     screen -ls
-                    read -p "【请输入会话名称】" session_name
+                    read -p "【${RED}请输入会话名称${NC}】" session_name
                     screen -S "$session_name" -X quit
                     echo -e "【${GREEN}会话 ${session_name} 已删除${NC}】"
                 fi
