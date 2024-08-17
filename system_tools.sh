@@ -60,22 +60,23 @@ set_shortcut
 # 显示菜单函数
 show_menu() {
     clear
+    echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${RED}系统工具合集${NC}】 ${YELLOW}${VERSION}${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${YELLOW}捷径${NC}】${WHITE}通过键盘快捷键 ${YELLOW}s${WHITE}（小写字母）可快速启动并进入脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${BLUE}1${NC}】 ${BLUE}管理${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}输入链规则${NC}"
-	echo -e "【${BLUE}2${NC}】 ${BLUE}管理服务器${YELLOW} SSH ${BLUE}防火墙规则${NC}"
+    echo -e "【${BLUE}2${NC}】 ${BLUE}管理服务器${YELLOW} SSH ${BLUE}防火墙规则${NC}"
     echo -e "【${BLUE}3${NC}】 ${BLUE}查看${YELLOW} iptables IPv4 Docker ${BLUE}用户链规则${NC}"
     echo -e "【${BLUE}4${NC}】 ${BLUE}查看${YELLOW} ip6tables IPv6 Docker ${BLUE}用户链规则${NC}"
     echo -e "【${BLUE}5${NC}】 ${BLUE}查看${YELLOW} iptables IPv4 Docker NAT ${BLUE}规则${NC}"
     echo -e "【${BLUE}6${NC}】 ${BLUE}查看${YELLOW} ip6tables IPv6 Docker NAT ${BLUE}规则${NC}"
-	echo -e "${BLUE}------------------------------------------------------------${NC}"
-	echo -e "【${BLUE}7${NC}】 ${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}"
+    echo -e "${BLUE}------------------------------------------------------------${NC}"
+    echo -e "【${BLUE}7${NC}】 ${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${BLUE}00${NC}】 ${GREEN}更新脚本${NC}"
     echo -e "【${BLUE}99${NC}】 ${WHITE}查看更新日志${NC}"
-	echo -e "${BLUE}------------------------------------------------------------${NC}"
+    echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${BLUE}88${NC}】 ${RED}退出脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
 }
