@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 定义版本号
-VERSION="v1.3"
+VERSION="v1.4"
 
 # 定义颜色
 BLUE='\033[96m'       # 浅蓝色
