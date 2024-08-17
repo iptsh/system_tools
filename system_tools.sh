@@ -557,7 +557,7 @@ update_script() {
                 # 使用 curl 直接下载并更新脚本
                 curl -O "$REMOTE_SCRIPT_URL" && \
                 chmod +x ./system_tools.sh && \
-                echo -e "【${GREEN}脚本已成功更新，正在重新启动${NC}】" && \
+                echo -e "【${GREEN}脚本已成功更新${NC}】【${YELLOW}正在重新启动${NC}】" && \
                 ./system_tools.sh  # 重新启动脚本
                 exit 0
                 ;;
@@ -632,7 +632,6 @@ while true; do
     show_menu
     # 使用红色提示用户输入选项编号
     echo -ne "【${BLUE}输入选项编号并按回车确认${NC}】"
-    echo -e "${BLUE}------------------------------------------------------------${NC}"
     read choice
     case $choice in
         1)
