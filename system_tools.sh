@@ -539,25 +539,27 @@ modify_existing_rules() {
 update_script() {
     show_progress "【${GREEN}更新脚本${NC}】"
 
-    # 临时文件路径
-    TEMP_SCRIPT="/tmp/temp_script.sh"
-
     # 第一步：下载远程脚本到临时文件
-    echo -e "【${RED}正在从远程${YELLOW} URL ${RED}下载最新版本的脚本到临时文件${NC}】"
-    curl -o "$TEMP_SCRIPT" "$REMOTE_SCRIPT_URL"
+    echo -e "【${RED}正在从远程${YELLOW} URL ${RED}检测最新版本的脚本${NC}】"
+    curl -o "/tmp/temp_script.sh" "$REMOTE_SCRIPT_URL"
 
     # 第二步：比对临时文件和当前脚本
-    if cmp -s "$TEMP_SCRIPT" "$SCRIPT_PATH"; then
+    if cmp -s "/tmp/temp_script.sh" "$SCRIPT_PATH"; then
         echo -e "【${GREEN}脚本已经是最新版本${NC}】【${GREEN}无需更新${NC}】"
-        rm -f "$TEMP_SCRIPT"  # 删除临时文件
+        rm -f "/tmp/temp_script.sh"  # 删除临时文件
+        echo -e "【${YELLOW}临时文件已删除${NC}】"
     else
         echo -e "【${YELLOW}检测到脚本有更新内容${NC}】【${YELLOW}是否更新${NC}】"
         read -p "$(echo -e "【${GREEN}请输入${RED} Y/N ${GREEN}回车确认${NC}】")" update_choice
         case $update_choice in
             y|Y)
-                cp "$TEMP_SCRIPT" "$SCRIPT_PATH"
-                chmod +x "$SCRIPT_PATH"
-                echo -e "【${GREEN}脚本已成功更新${NC}】"
+                echo -e "【${RED}正在更新脚本${NC}】"
+                # 使用 curl 直接下载并更新脚本
+                curl -O "$REMOTE_SCRIPT_URL" && \
+                chmod +x ./system_tools.sh && \
+                echo -e "【${GREEN}脚本已成功更新，正在重新启动...${NC}】" && \
+                ./system_tools.sh  # 重新启动脚本
+                exit 0
                 ;;
             n|N)
                 echo -e "【${RED}脚本更新已取消${NC}】"
@@ -566,7 +568,8 @@ update_script() {
                 echo -e "【${RED}无效选择${NC}】【${RED}脚本更新已取消${NC}】"
                 ;;
         esac
-        rm -f "$TEMP_SCRIPT"  # 删除临时文件
+        rm -f "/tmp/temp_script.sh"  # 删除临时文件
+        echo -e "【${YELLOW}临时文件已删除${NC}】"
     fi
 }
 
