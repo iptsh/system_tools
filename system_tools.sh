@@ -19,10 +19,10 @@ CHANGE_LOG_URL="https://raw.githubusercontent.com/scarsong/system_tools/main/Cha
 
 # 判断是否存在快捷文件s，并检查内容是否一致
 if [ ! -f "$SCRIPT_PATH" ]; then
-    echo -e "【${YELLOW}文件 ${SCRIPT_PATH} 不存在，正在创建...${NC}】"
+    echo -e "【${YELLOW}文件 ${SCRIPT_PATH} 不存在${NC}】【${YELLOW}正在创建${NC}】"
     COPY_FILE=1
 elif ! cmp -s "$SOURCE_SCRIPT" "$SCRIPT_PATH"; then
-    echo -e "【${YELLOW}文件 ${SCRIPT_PATH} 存在，但内容不同，正在更新...${NC}】"
+    echo -e "【${YELLOW}文件 ${SCRIPT_PATH} 存在${NC}】【${YELLOW}但内容不同${NC}】【${YELLOW}正在更新${NC}】"
     COPY_FILE=1
 else
     COPY_FILE=0
@@ -33,13 +33,13 @@ if [ $COPY_FILE -eq 1 ]; then
     if [ -f "$SOURCE_SCRIPT" ]; then
         cp "$SOURCE_SCRIPT" "$SCRIPT_PATH"
         chmod +x "$SCRIPT_PATH"
-        echo -e "【${GREEN}文件 ${SCRIPT_PATH} 已更新，并复制了 ${SOURCE_SCRIPT} 的内容，并赋予执行权限。${NC}】"
+        echo -e "【${GREEN}文件 ${SCRIPT_PATH} 已更新${NC}】【${GREEN}且已复制 ${SOURCE_SCRIPT} 的内容${NC}】【${GREEN}并已赋予执行权限${NC}】"
     else
-        echo -e "【${RED}源文件 ${SOURCE_SCRIPT} 不存在，无法更新 ${SCRIPT_PATH}。${NC}】"
+        echo -e "【${RED}源文件 ${SOURCE_SCRIPT} 不存在${NC}】【${RED}无法更新 ${SCRIPT_PATH}${NC}】"
         exit 1
     fi
 else
-    echo -e "【${GREEN}文件 ${SCRIPT_PATH} 已是最新版本，无需更新。${NC}】"
+    echo -e "【${GREEN}文件 ${SCRIPT_PATH} 已是最新版本${NC}】【${GREEN}无需更新${NC}】"
 fi
 
 # 设置快捷键的函数
@@ -48,9 +48,9 @@ set_shortcut() {
         sed -i "/alias .*='s'$/d" ~/.bashrc
         echo "alias s='$SCRIPT_PATH'" >> ~/.bashrc
         source ~/.bashrc
-        echo -e "【${GREEN}快捷键 's' 已设置为执行脚本: $SCRIPT_PATH${NC}】"
+        echo -e "【${GREEN}快捷键 's' 已设置为执行脚本 $SCRIPT_PATH${NC}】"
     else
-        echo -e "【${GREEN}快捷键 's' 已存在，无需重新设置。${NC}】"
+        echo -e "【${GREEN}快捷键 's' 已存在${NC}】【${GREEN}无需重新设置${NC}】"
     fi
 }
 
