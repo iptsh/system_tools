@@ -13,7 +13,7 @@ chmod +x ./system_tools.sh && \
 ```
 #### 或者
 ```bash
-wget --no-cache https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && \
-chmod +x ./system_tools.sh && \
+wget "https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh?$(date +%s)" -O system_tools.sh && \
+chmod +x system_tools.sh && \
 ./system_tools.sh
 ```
