@@ -76,10 +76,10 @@ show_menu() {
     echo -e "${BLUE}------------------------------------------------------------${NC}"
     echo -e "【${BLUE}7${NC}】 ${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
-    echo -e "【${BLUE}00${NC}】 ${GREEN}更新脚本${NC}"
-    echo -e "【${BLUE}99${NC}】 ${WHITE}查看更新日志${NC}"
+    echo -e "【${BLUE}8${NC}】 ${GREEN}脚本更新${NC}"
+    echo -e "【${BLUE}9${NC}】 ${WHITE}更新日志${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
-    echo -e "【${BLUE}88${NC}】 ${RED}退出脚本${NC}"
+    echo -e "【${BLUE}0${NC}】 ${RED}退出脚本${NC}"
     echo -e "${BLUE}------------------------------------------------------------${NC}"
 }
 
@@ -660,13 +660,13 @@ while true; do
             ;;
 		7) manage_screen 
 		   ;;
-        00) 
+        8) 
             update_script 
             ;;
-        99) 
+        9) 
             view_change_log 
             ;;
-        88) 
+        0) 
             exit_script 
             ;;
         *) 
