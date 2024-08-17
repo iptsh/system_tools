@@ -6,6 +6,7 @@
 #### 这是一个非常简易化的系统工具合集，目前是初步版本，方便自己使用。
 #### 全部来自 ChatGPT 的训练结果，逐步添加更多常用功能，环境为 Debian 12 系统。
 # 安装使用方法：
+#### ```bash
 #### curl -O https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && chmod +x ./system_tools.sh && ./system_tools.sh
 
 #### 或者
