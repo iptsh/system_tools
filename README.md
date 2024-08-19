@@ -48,3 +48,5 @@ wget "https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.
 chmod +x system_tools.sh && \
 ./system_tools.sh
 ```
+</div>
+<div id="chinese" style="display:none;">
