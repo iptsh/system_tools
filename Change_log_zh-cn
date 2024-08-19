@@ -1,19 +1,1 @@
-### [Changelog]
 
----
-
-#### [v1.1] First version, view existing inbound firewall rules, including Docker port rules and forwarding rules. (2024.08.16)
-
----
-
-#### [v1.2] Second version, SSH management for the firewall, menu update, changelog, integration of ipset addresses, deletion of host rules. (2024.08.16)
-
----
-
-#### [v1.3] Third version, fine-tuning, color optimization, improved readability, key information highlighted, session screen management, fixed updating even when choosing N/n. (2024.08.17)
-
----
-
-#### [v1.4] Fourth version, fixed the script update issue, reminder to delete temporary update files, aesthetic optimizations, added author website display. (2024.08.17)
-
----
