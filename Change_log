@@ -1,20 +1,11 @@
-
-### [Changelog]
-
----
-
-#### [v1.1] First version, view existing inbound firewall rules, including Docker port rules and forwarding rules. (2024.08.16)
-
----
-
-#### [v1.2] Second version, SSH management for the firewall, menu update, changelog, integration of ipset addresses, deletion of host rules. (2024.08.16)
-
----
-
-#### [v1.3] Third version, fine-tuning, color optimization, improved readability, key information highlighted, session screen management, fixed updating even when choosing N/n. (2024.08.17)
-
----
-
-#### [v1.4] Fourth version, fixed the script update issue, reminder to delete temporary update files, aesthetic optimizations, added author website display. (2024.08.17)
-
----
+-----------------------------------------------------------------------------------------------------------------------------
+【Change Log】
+-----------------------------------------------------------------------------------------------------------------------------
+【v1.1】 Initial release, view existing inbound firewall rules including Docker port rules and forwarding rules. (2024.08.16 PM)
+-----------------------------------------------------------------------------------------------------------------------------
+【v1.2】 Second release, added SSH management for firewall, update menu, update log, integrated ipset addresses, and removed host rules. (2024.08.16 Night)
+-----------------------------------------------------------------------------------------------------------------------------
+【v1.3】 Third release, adjusted details, optimized color scheme, enhanced readability, highlighted key information, session screen management, and fixed issue where selecting N/n still triggered an update. (2024.08.17 PM)
+-----------------------------------------------------------------------------------------------------------------------------
+【v1.4】 Fourth release, fixed issue preventing script updates, reminded to delete update temporary files, improved aesthetics, and added author’s website display. (2024.08.17 Night)
+-----------------------------------------------------------------------------------------------------------------------------
