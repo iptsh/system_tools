@@ -1125,7 +1125,7 @@ load_config() {
 # Function to handle first run and language selection
 # 处理首次运行和语言选择的函数
 first_run() {
-    echo -e "【${BLUE}First time running${NC}】, 【${BLUE}please select a language${NC}】 / 【${BLUE}首次运行${NC}】，【${BLUE}请选择语言${NC}】"
+    echo -e "【${BLUE}First time running${NC}】【${BLUE}please select a language${NC}】 / 【${BLUE}首次运行${NC}】【${BLUE}请选择语言${NC}】"
     echo -e "【${BLUE}1${NC}】【${YELLOW}English${NC}】"
     echo -e "【${BLUE}2${NC}】【${YELLOW}中文${NC}】"
     read -p "$(echo -e "【${RED}Enter choice${NC}】 / 【${RED}输入选项${NC}】")" lang_choice
