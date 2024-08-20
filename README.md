@@ -4,8 +4,6 @@ English | [简体中文](./README.zh-cn.md)
 
 ![Snipaste_2024-08-20_22-04-12](https://github.com/user-attachments/assets/2e6a7d86-4049-480c-93d8-29d86a1cff20)
 
-![Snipaste_2024-08-20_22-04-47](https://github.com/user-attachments/assets/ef4b73df-958b-47df-9593-86b85a0319a0)
-
 ---
 
 ### [Changelog]
