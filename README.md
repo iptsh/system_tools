@@ -1,6 +1,6 @@
 # Script Introduction
 
-English | 【简体中文】(./README.zh-cn.md)
+English | [简体中文](./README.zh-cn.md)
 
 ![Snipaste_2024-08-20_22-04-12](https://github.com/user-attachments/assets/2e6a7d86-4049-480c-93d8-29d86a1cff20)
 
