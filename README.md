@@ -2,7 +2,9 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![IMG_20240817_232412](https://github.com/user-attachments/assets/0aade54f-aa7a-4889-929f-180b1644897f)
+![Snipaste_2024-08-20_22-04-12](https://github.com/user-attachments/assets/2e6a7d86-4049-480c-93d8-29d86a1cff20)
+
+![Snipaste_2024-08-20_22-04-47](https://github.com/user-attachments/assets/ef4b73df-958b-47df-9593-86b85a0319a0)
 
 ---
 
@@ -25,7 +27,8 @@ English | [简体中文](./README.zh-cn.md)
 #### [v1.4] Fourth version, fixed the script update issue, reminder to delete temporary update files, aesthetic optimizations, added author website display. (2024.08.17)
 
 ---
-
+#### 【v1.5】 Fifth Edition, Added language switching feature to the script, supporting switching between Chinese and English, with improvements to the script’s appearance. (2024.08.20 Night)
+---
 # Why was this script created?
 
 #### Noticed that many commands had to be entered manually each time, which was very inconvenient, so I integrated them into a script for easier maintenance and viewing.
