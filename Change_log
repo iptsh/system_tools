@@ -10,7 +10,14 @@
 【v1.4】 Fourth release, fixed issue preventing script updates, reminded to delete update temporary files, improved aesthetics, and added author’s website display. (2024.08.17 Night)
 -----------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------
-rgmrtognerngtorrnhmtyl,hjmytujlmuewrpothmgfhbmntyujnuytjnmyutyuhjntyjnyt
+通过多次重复请求来绕过缓存，确保最终获取的是最新内容。
+bash
+复制代码
+for i in {1..5}; do
+    wget -q -O - "$URL_TO_FETCH" | while IFS= read -r line; do
+        echo "$line"
+    done
+done
 -----------------------------------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------------------------------------
