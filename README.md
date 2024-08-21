@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![Snipaste_2024-08-20_22-04-12](https://github.com/user-attachments/assets/2e6a7d86-4049-480c-93d8-29d86a1cff20)
+
 
 ---
 
@@ -25,8 +25,15 @@ English | [简体中文](./README.zh-cn.md)
 #### 【v1.4】Fourth version, fixed the script update issue, reminder to delete temporary update files, aesthetic optimizations, added author website display. (2024.08.17)
 
 ---
+
 #### 【v1.5】 Fifth Edition, Added language switching feature to the script, supporting switching between Chinese and English, with improvements to the script’s appearance. (2024.08.20 Night)
+
 ---
+
+#### 【v1.6】 Sixth Edition，This script manages Docker firewall rules and supports services that allow either IPv4-only access or both IPv4 and IPv6 access. If the latter is the case, enabling Docker's custom network and configuring IPv6 forwarding and access is necessary. The script does not impose how users should configure these settings, but as of now, using the Docker project `robbertkl/ipv6nat` to achieve IPv6 forwarding and access within Docker networks is a recommended approach, although other methods can also be used.The management of Docker service firewall rules was the primary motivation for creating this script and is considered by the author as a highly necessary strategy for Docker maintenance. Two very important aspects are limiting external access to Docker services and enabling IPv6 access for Docker services. (2024.08.21 Noon)
+
+---
+
 # Why was this script created?
 
 #### Noticed that many commands had to be entered manually each time, which was very inconvenient, so I integrated them into a script for easier maintenance and viewing.
