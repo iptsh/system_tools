@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v1.5"
+VERSION="v1.6"
 
 # Define color
 # 定义颜色
@@ -70,30 +70,30 @@ set_shortcut
 show_menu() {
     clear
     echo -e "${BLUE}================================================================================${NC}"
-	
+
     if [ "$LANGUAGE" = "CN" ]; then
         echo -e "【${RED}系统工具合集${NC}】【${YELLOW}${VERSION}${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-		echo -e "【${WHITE}作者网站】【${YELLOW} https://scarsong.com ${NC}】"
+        echo -e "【${WHITE}作者网站】【${YELLOW} https://scarsong.com ${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${YELLOW}捷径${NC}】【${WHITE}通过快捷键 ${YELLOW}s${WHITE} 可快速启动脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}01${NC}】【${BLUE}管理${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}输入链规则${NC}】"
-        echo -e "【${BLUE}02${NC}】【${BLUE}管理服务器${YELLOW} SSH ${BLUE}防火墙规则${NC}】"
-        echo -e "【${BLUE}03${NC}】【${BLUE}查看${YELLOW} iptables IPv4 Docker ${BLUE}用户链规则${NC}】"
-        echo -e "【${BLUE}04${NC}】【${BLUE}查看${YELLOW} ip6tables IPv6 Docker ${BLUE}用户链规则${NC}】"
-        echo -e "【${BLUE}05${NC}】【${BLUE}查看${YELLOW} iptables IPv4 Docker NAT ${BLUE}规则${NC}】"
-        echo -e "【${BLUE}06${NC}】【${BLUE}查看${YELLOW} ip6tables IPv6 Docker NAT ${BLUE}规则${NC}】"
+        echo -e "【${BLUE}01${NC}】【${BLUE}管理${YELLOW} Docker ${BLUE}防火墙规则${NC}】"
+        echo -e "【${BLUE}02${NC}】【${BLUE}管理${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}输入链规则${NC}】"
+        echo -e "【${BLUE}03${NC}】【${BLUE}管理服务器${YELLOW} SSH ${BLUE}防火墙规则${NC}】"
+        echo -e "【${BLUE}04${NC}】【${BLUE}查看${YELLOW} iptables IPv4 Docker ${BLUE}用户链规则${NC}】"
+        echo -e "【${BLUE}05${NC}】【${BLUE}查看${YELLOW} ip6tables IPv6 Docker ${BLUE}用户链规则${NC}】"
+        echo -e "【${BLUE}06${NC}】【${BLUE}查看${YELLOW} iptables IPv4 Docker NAT ${BLUE}规则${NC}】"
+        echo -e "【${BLUE}07${NC}】【${BLUE}查看${YELLOW} ip6tables IPv6 Docker NAT ${BLUE}规则${NC}】"
+        echo -e "【${BLUE}08${NC}】【${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}07${NC}】【${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}】"
+        echo -e "【${BLUE}18${NC}】【${RED}切换脚本显示语言${NC}】【${YELLOW}Switch script language${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}17${NC}】【${RED}切换脚本显示语言${NC}】【${YELLOW}Switch script language${NC}】"
-        echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}18${NC}】【${GREEN}脚本更新${NC}】"
-        echo -e "【${BLUE}19${NC}】【${WHITE}更新日志${NC}】"
+        echo -e "【${BLUE}19${NC}】【${GREEN}脚本更新${NC}】"
+        echo -e "【${BLUE}20${NC}】【${WHITE}更新日志${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}00${NC}】【${RED}退出脚本${NC}】"
-		echo -e "${BLUE}================================================================================${NC}"
+        echo -e "${BLUE}================================================================================${NC}"
     else
         echo -e "【${RED}System Tools Collection${NC}】【${YELLOW}${VERSION}${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -101,24 +101,25 @@ show_menu() {
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${YELLOW}Shortcut${NC}】【${WHITE}Use the shortcut key ${YELLOW}s${WHITE} to quickly start the script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}01${NC}】【${BLUE}Manage${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}input chain rules${NC}】"
-        echo -e "【${BLUE}02${NC}】【${BLUE}Manage server ${YELLOW}SSH ${BLUE}firewall rules${NC}】"
-        echo -e "【${BLUE}03${NC}】【${BLUE}View ${YELLOW}iptables IPv4 Docker ${BLUE}user chain rules${NC}】"
-        echo -e "【${BLUE}04${NC}】【${BLUE}View ${YELLOW}ip6tables IPv6 Docker ${BLUE}user chain rules${NC}】"
-        echo -e "【${BLUE}05${NC}】【${BLUE}View ${YELLOW}iptables IPv4 Docker NAT ${BLUE}rules${NC}】"
-        echo -e "【${BLUE}06${NC}】【${BLUE}View ${YELLOW}ip6tables IPv6 Docker NAT ${BLUE}rules${NC}】"
+        echo -e "【${BLUE}01${NC}】【${BLUE}Manage${YELLOW} Docker ${BLUE}firewall rules${NC}】"
+        echo -e "【${BLUE}02${NC}】【${BLUE}Manage${YELLOW} iptables IPv4 / ip6tables IPv6 ${BLUE}input chain rules${NC}】"
+        echo -e "【${BLUE}03${NC}】【${BLUE}Manage server ${YELLOW}SSH ${BLUE}firewall rules${NC}】"
+        echo -e "【${BLUE}04${NC}】【${BLUE}View ${YELLOW}iptables IPv4 Docker ${BLUE}user chain rules${NC}】"
+        echo -e "【${BLUE}05${NC}】【${BLUE}View ${YELLOW}ip6tables IPv6 Docker ${BLUE}user chain rules${NC}】"
+        echo -e "【${BLUE}06${NC}】【${BLUE}View ${YELLOW}iptables IPv4 Docker NAT ${BLUE}rules${NC}】"
+        echo -e "【${BLUE}07${NC}】【${BLUE}View ${YELLOW}ip6tables IPv6 Docker NAT ${BLUE}rules${NC}】"
+        echo -e "【${BLUE}08${NC}】【${BLUE}System session management with ${YELLOW}screen ${BLUE}tool${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}07${NC}】【${BLUE}System session management with ${YELLOW}screen ${BLUE}tool${NC}】"
+        echo -e "【${BLUE}18${NC}】【${RED}Switch script language${NC}】【${YELLOW}切换脚本显示语言${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}17${NC}】【${RED}Switch script language${NC}【${YELLOW}切换脚本显示语言${NC}】"
-        echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}18${NC}】【${GREEN}Update script${NC}】"
-        echo -e "【${BLUE}19${NC}】【${WHITE}Change log${NC}】"
+        echo -e "【${BLUE}19${NC}】【${GREEN}Update script${NC}】"
+        echo -e "【${BLUE}20${NC}】【${WHITE}Change log${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}00${NC}】【${RED}Exit script${NC}】"
-		echo -e "${BLUE}================================================================================${NC}"
+        echo -e "${BLUE}================================================================================${NC}"
     fi
 }
+
 
 # Manage screen tool function
 # 管理 screen 工具的函数
@@ -806,6 +807,17 @@ create_ssh_rules() {
         read -p "【${YELLOW} IPv6 ${NC}addresses】" ipv6_addresses
     fi
 
+    # Check if /root/add_ssh_ips.sh already exists
+    # 检查 /root/add_ssh_ips.sh 是否已经存在
+    if [ -f /root/add_ssh_ips.sh ]; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}文件已存在，无需重复创建。】"
+        else
+            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}file already exists, no need to recreate.】"
+        fi
+        return
+    fi
+
     # Create the add_ssh_ips.sh script
     # 创建 add_ssh_ips.sh 脚本
     cat <<EOF > /root/add_ssh_ips.sh
@@ -1151,6 +1163,738 @@ first_run() {
 # 加载或初始化配置
 load_config
 
+# Display Docker IPv4 IPSET addresses
+# 显示 Docker IPv4 IPSET 地址
+show_docker_ipv4_ipset() {
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${BLUE}当前系统防火墙通过${YELLOW} IPSET ${BLUE}工具放行的${YELLOW} IPv4 ${BLUE}地址${NC}】"
+    else
+        echo -e "【${BLUE}IPv4 addresses allowed by firewall via ${YELLOW}IPSET ${BLUE}in the system${NC}】"
+    fi
+
+    # Handling IPv4 addresses
+    # 处理 IPv4 地址
+    ipset list allowed_ipv4_ips 2>/dev/null | awk -v green="$GREEN" -v yellow="$YELLOW" -v reset="$NC" '
+    BEGIN {in_list=0}
+    /Name:/ || /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {
+        if ($0 ~ /Name:/) {
+            print yellow $0 reset;
+        } else if (in_list && $0 ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) {
+            gsub(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/, green "&" reset);
+            print;
+        }
+    }
+    /Members:/ {in_list=1; next}
+    '
+}
+
+# Display Docker IPv4 and IPv6 IPSET addresses
+# 显示 Docker IPv4 和 IPv6 IPSET 地址
+show_docker_ipv4_ipv6_ipset() {
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${BLUE}当前系统防火墙通过${YELLOW} IPSET ${BLUE}工具放行的${YELLOW} IPv4 和 IPv6 ${BLUE}地址${NC}】"
+    else
+        echo -e "【${BLUE}IPv4 and IPv6 addresses allowed by firewall via ${YELLOW}IPSET ${BLUE}in the system${NC}】"
+    fi
+
+    # Handling IPv4 addresses
+    # 处理 IPv4 地址
+    ipset list allowed_ips 2>/dev/null | awk -v green="$GREEN" -v yellow="$YELLOW" -v reset="$NC" '
+    BEGIN {in_list=0}
+    /Name:/ || /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {
+        if ($0 ~ /Name:/) {
+            print yellow $0 reset;
+        } else if (in_list && $0 ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) {
+            gsub(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/, green "&" reset);
+            print;
+        }
+    }
+    /Members:/ {in_list=1; next}
+    '
+
+    # Handling IPv6 addresses
+    # 处理 IPv6 地址
+    ipset list allowed_ipv6_ips 2>/dev/null | awk -v green="$GREEN" -v yellow="$YELLOW" -v reset="$NC" '
+    BEGIN {in_list=0}
+    /Name:/ || /^[0-9a-fA-F:]+$/ {
+        if ($0 ~ /Name:/) {
+            print yellow $0 reset;
+        } else if (in_list && $0 ~ /^[0-9a-fA-F:]+$/) {
+            gsub(/([0-9a-fA-F:]+)/, green "&" reset);
+            print;
+        }
+    }
+    /Members:/ {in_list=1; next}
+    '
+
+    # Handling Nezha IPv4 addresses (if applicable)
+    # 处理 Nezha IPv4 地址（如果适用）
+    if ipset list allowed_nezha_ips 2>/dev/null > /dev/null; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${BLUE}当前系统防火墙通过${YELLOW} IPSET ${BLUE}工具放行的${YELLOW} Nezha IPv4 ${BLUE}地址${NC}】"
+        else
+            echo -e "【${BLUE}IPv4 addresses for Nezha allowed by firewall via ${YELLOW}IPSET ${BLUE}in the system${NC}】"
+        fi
+        ipset list allowed_nezha_ips 2>/dev/null | awk -v green="$GREEN" -v yellow="$YELLOW" -v reset="$NC" '
+        BEGIN {in_list=0}
+        /Name:/ || /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {
+            if ($0 ~ /Name:/) {
+                print yellow $0 reset;
+            } else if (in_list && $0 ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) {
+                gsub(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/, green "&" reset);
+                print;
+            }
+        }
+        /Members:/ {in_list=1; next}
+        '
+    fi
+
+    # Handling Nezha IPv6 addresses (if applicable)
+    # 处理 Nezha IPv6 地址（如果适用）
+    if ipset list allowed_nezha_ipv6_ips 2>/dev/null > /dev/null; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${BLUE}当前系统防火墙通过${YELLOW} IPSET ${BLUE}工具放行的${YELLOW} Nezha IPv6 ${BLUE}地址${NC}】"
+        else
+            echo -e "【${BLUE}IPv6 addresses for Nezha allowed by firewall via ${YELLOW}IPSET ${BLUE}in the system${NC}】"
+        fi
+        ipset list allowed_nezha_ipv6_ips 2>/dev/null | awk -v green="$GREEN" -v yellow="$YELLOW" -v reset="$NC" '
+        BEGIN {in_list=0}
+        /Name:/ || /^[0-9a-fA-F:]+$/ {
+            if ($0 ~ /Name:/) {
+                print yellow $0 reset;
+            } else if (in_list && $0 ~ /^[0-9a-fA-F:]+$/) {
+                gsub(/([0-9a-fA-F:]+)/, green "&" reset);
+                print;
+            }
+        }
+        /Members:/ {in_list=1; next}
+        '
+    fi
+}
+
+# Check if Docker is installed
+# 检查是否已安装 Docker
+check_docker_installed() {
+    if ! command -v docker &> /dev/null; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}当前系统 ${YELLOW}Docker ${RED}未安装${NC}】【${RED}无法管理防火墙规则${NC}】"
+            echo -e "【${YELLOW}返回主菜单${NC}】"
+        else
+            echo -e "【${RED}Docker is not installed on this system${NC}】【${RED}Cannot manage firewall rules${NC}】"
+            echo -e "【${YELLOW}Returning to main menu${NC}】"
+        fi
+        return 1
+    else
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}当前系统已经安装 Docker${NC}】"
+            echo -e "【${YELLOW}请选择需要管理的 Docker 网络类型${NC}】\n【${BLUE}1${NC}】 ${BLUE}所选 Docker 网络仅支持IPv4${NC}\n【${BLUE}2${NC}】 ${BLUE}所选 Docker 网络同时支持IPv4和IPv6${NC}"
+            read -p "【请输入选项】" network_choice
+        else
+            echo -e "【${GREEN}Docker is already installed on this system${NC}】"
+            echo -e "【${YELLOW}Please select Docker network configuration${NC}】\n【${BLUE}1${NC}】 ${BLUE}The selected Docker network supports IPv4 only${NC}\n【${BLUE}2${NC}】 ${BLUE}The selected Docker network supports both IPv4 and IPv6${NC}"
+            read -p "【Enter your choice】" network_choice
+        fi
+
+        # Check if network_choice is valid
+		# 检查network_choice是否有效
+        if [[ "$network_choice" != "1" && "$network_choice" != "2" ]]; then
+            if [ "$LANGUAGE" = "CN" ]; then
+                echo -e "【${RED}无效选项${NC}】【${YELLOW}返回主菜单${NC}】"
+            else
+                echo -e "【${RED}Invalid option${NC}】【${YELLOW}Returning to main menu${NC}】"
+            fi
+            return 1
+        fi
+
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${YELLOW}是否已经配置 Docker 防火墙规则${NC}】\n【${BLUE}1${NC}】 ${BLUE}是${NC}\n【${BLUE}2${NC}】 ${BLUE}否${NC}"
+            read -p "【请输入选项】" docker_choice
+        else
+            echo -e "【${YELLOW}Have Docker firewall rules been configured${NC}】\n【${BLUE}1${NC}】 ${BLUE}Yes${NC}\n【${BLUE}2${NC}】 ${BLUE}No${NC}"
+            read -p "【Enter your choice】" docker_choice
+        fi
+
+        if [[ $docker_choice == "1" ]]; then
+            manage_docker_firewall
+        elif [[ $docker_choice == "2" ]]; then
+            create_docker_rules
+        else
+            if [ "$LANGUAGE" = "CN" ]; then
+                echo -e "【${RED}无效选项${NC}】【${YELLOW}返回主菜单${NC}】"
+            else
+                echo -e "【${RED}Invalid option${NC}】【${YELLOW}Returning to main menu${NC}】"
+            fi
+            return 1
+        fi
+    fi
+}
+
+# Manage Docker firewall rules
+# 管理 Docker 防火墙规则
+manage_docker_firewall() {
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${YELLOW}请选择操作${NC}】\n【${BLUE}1${NC}】 ${BLUE}查看现有规则${NC}\n【${BLUE}2${NC}】 ${BLUE}修改现有规则${NC}"
+        read -p "【请输入选项】" modify_choice
+    else
+        echo -e "【${YELLOW}Select an operation${NC}】\n【${BLUE}1${NC}】 ${BLUE}View existing rules${NC}\n【${BLUE}2${NC}】 ${BLUE}Modify existing rules${NC}"
+        read -p "【Enter your choice】" modify_choice
+    fi
+
+    case $modify_choice in
+        1)
+            case $network_choice in
+                1)
+                    if [ "$LANGUAGE" = "CN" ]; then
+                        echo -e "【${BLUE}查看 IPv4 防火墙规则${NC}】"
+                    else
+                        echo -e "【${BLUE}Viewing IPv4 firewall rules${NC}】"
+                    fi
+                    iptables -L DOCKER-USER -n --line-numbers | output_command
+					show_docker_ipv4_ipset
+                    ;;
+                2)
+                    if [ "$LANGUAGE" = "CN" ]; then
+                        echo -e "【${BLUE}查看 IPv4 和 IPv6 防火墙规则${NC}】"
+                    else
+                        echo -e "【${BLUE}Viewing IPv4 and IPv6 firewall rules${NC}】"
+                    fi
+                    iptables -L DOCKER-USER -n --line-numbers | output_command
+                    ip6tables -L DOCKER-USER -n --line-numbers | output_command
+					show_docker_ipv4_ipv6_ipset
+                    ;;
+            esac
+            ;;
+        2)
+            case $network_choice in
+                1)
+                    if [ -f "/root/add_ipv4_ips.sh" ] && [ -f "/etc/systemd/system/add_ipv4_ips.service" ]; then
+                        if [ "$LANGUAGE" = "CN" ]; then
+                            echo -e "【${GREEN}已找到 IPv4 规则文件并对其进行修改${NC}】"
+                        else
+                            echo -e "【${GREEN}IPv4 rule file found and modifying it${NC}】"
+                        fi
+                    modify_docker_ipv4_rules
+                    else
+                        if [ "$LANGUAGE" = "CN" ]; then
+                            echo -e "【${RED}未检测到 IPv4 规则文件或服务${NC}】【${RED}开始创建${NC}】"
+                        else
+                            echo -e "【${RED}IPv4 rule file or service not detected${NC}】【${RED}Starting creation${NC}】"
+                        fi
+                        create_docker_rules
+                    fi
+                    ;;
+                2)
+                    if [ -f "/root/add_ips.sh" ] && [ -f "/etc/systemd/system/add_ips.service" ]; then
+                        if [ "$LANGUAGE" = "CN" ]; then
+                            echo -e "【${GREEN}已找到 IPv4 和 IPv6 规则文件并对其进行修改${NC}】"
+                        else
+                            echo -e "【${GREEN}IPv4 and IPv6 rule file found and modifying it${NC}】"
+                        fi
+                    modify_docker_ipv6_rules
+                    else
+                        if [ "$LANGUAGE" = "CN" ]; then
+                            echo -e "【${RED}未检测到 IPv4 和 IPv6 规则文件或服务${NC}】【${RED}开始创建${NC}】"
+                        else
+                            echo -e "【${RED}IPv4 and IPv6 rule file or service not detected${NC}】【${RED}Starting creation${NC}】"
+                        fi
+                        create_docker_rules
+                    fi
+                    ;;
+            esac
+            ;;
+        *)
+            if [ "$LANGUAGE" = "CN" ]; then
+                echo -e "【${RED}无效选项${NC}】【${YELLOW}返回主菜单${NC}】"
+            else
+                echo -e "【${RED}Invalid option${NC}】【${YELLOW}Returning to main menu${NC}】"
+            fi
+            ;;
+    esac
+}
+
+# Modify Docker IPv4 firewall rules
+# 修改 Docker IPv4 防火墙规则
+modify_docker_ipv4_rules() {
+    local script_path="/root/add_ipv4_ips.sh"
+    local service_name="add_ipv4_ips.service"
+    local show_ipset_function="show_docker_ipv4_ipset"
+
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${BLUE}修改${YELLOW} Docker ${BLUE}IPv4 ${YELLOW}防火墙规则${NC}】"
+    else
+        echo -e "【${BLUE}Modifying${YELLOW} Docker ${BLUE}IPv4 ${YELLOW}Firewall Rules${NC}】"
+    fi
+
+    if [ -f "$script_path" ]; then
+        # Open the script for manual modification
+        # 打开脚本供手动修改
+        nano $script_path
+
+        # Make the script executable
+        # 赋予脚本执行权限
+        chmod +x $script_path
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}已赋予脚本执行权限${NC}】"
+        else
+            echo -e "【${GREEN}Script execution permissions granted${NC}】"
+        fi
+
+        # Reapply the rules
+        # 重新应用规则
+        systemctl restart $service_name
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}当前${YELLOW} Docker ${GREEN}IPv4 ${YELLOW}防火墙规则已被修改并成功重新应用${NC}】"
+        else
+            echo -e "【${GREEN}Docker ${YELLOW}IPv4 ${GREEN}Firewall rules have been modified and successfully reapplied${NC}】"
+        fi
+
+        # Display IPSET addresses
+        # 显示 IPSET 地址
+        $show_ipset_function
+    else
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}无法找到 IPv4 规则文件${NC}】【${RED}无法修改${NC}】"
+        else
+            echo -e "【${RED}IPv4 rules file not found${NC}】【${RED}Unable to modify${NC}】"
+        fi
+    fi
+
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${GREEN}IPv4 规则已更新${NC}】"
+    else
+        echo -e "【${GREEN}IPv4 rules have been updated${NC}】"
+    fi
+}
+
+# Modify Docker IPv6 firewall rules
+# 修改 Docker IPv6 防火墙规则
+modify_docker_ipv6_rules() {
+    local script_path="/root/add_ips.sh"
+    local service_name="add_ips.service"
+    local show_ipset_function="show_docker_ipv4_ipv6_ipset"
+
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${BLUE}修改${YELLOW} Docker ${BLUE}IPv4_IPv6 ${YELLOW}防火墙规则${NC}】"
+    else
+        echo -e "【${BLUE}Modifying${YELLOW} Docker ${BLUE}IPv6 ${YELLOW}Firewall Rules${NC}】"
+    fi
+
+    if [ -f "$script_path" ]; then
+        # Open the script for manual modification
+        # 打开脚本供手动修改
+        nano $script_path
+
+        # Make the script executable
+        # 赋予脚本执行权限
+        chmod +x $script_path
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}已赋予脚本执行权限${NC}】"
+        else
+            echo -e "【${GREEN}Script execution permissions granted${NC}】"
+        fi
+
+        # Reapply the rules
+        # 重新应用规则
+        systemctl restart $service_name
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}当前${YELLOW} Docker ${GREEN}IPv4_IPv6 ${YELLOW}防火墙规则已被修改并成功重新应用${NC}】"
+        else
+            echo -e "【${GREEN}Docker ${YELLOW}IPv6 ${GREEN}Firewall rules have been modified and successfully reapplied${NC}】"
+        fi
+
+        # Display IPSET addresses
+        # 显示 IPSET 地址
+        $show_ipset_function
+    else
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}无法找到 IPv6 规则文件${NC}】【${RED}无法修改${NC}】"
+        else
+            echo -e "【${RED}IPv6 rules file not found${NC}】【${RED}Unable to modify${NC}】"
+        fi
+    fi
+
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${GREEN}IPv4_IPv6 规则已更新${NC}】"
+    else
+        echo -e "【${GREEN}IPv6 rules have been updated${NC}】"
+    fi
+}
+
+# Create Docker firewall rules
+# 创建 Docker 防火墙规则
+create_docker_rules() {
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${YELLOW}创建 Docker 防火墙规则${NC}】"
+    else
+        echo -e "【${YELLOW}Creating Docker firewall rules${NC}】"
+    fi
+
+    # Choose to execute different scripts based on network configuration
+    # 根据网络配置选择执行不同的脚本
+    if [[ $network_choice == "1" ]]; then
+        create_ipv4_only_rules
+    elif [[ $network_choice == "2" ]]; then
+        create_dual_stack_rules
+    fi
+}
+
+# Create an IPv4-only Docker firewall rule
+# 创建仅支持 IPv4 的 Docker 防火墙规则
+create_ipv4_only_rules() {
+    # Check if /root/add_ipv4_ips.sh already exists
+    # 检查 /root/add_ipv4_ips.sh 是否已经存在
+    if [ -f /root/add_ipv4_ips.sh ]; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}/root/add_ipv4_ips.sh ${NC}文件已存在，无需重复创建。】"
+        else
+            echo -e "【${RED}/root/add_ipv4_ips.sh ${NC}file already exists, no need to recreate.】"
+        fi
+        return
+    fi
+
+    # Create the add_ipv4_ips.sh script
+    # 创建 add_ipv4_ips.sh 脚本
+    cat <<EOF > /root/add_ipv4_ips.sh
+#!/bin/bash
+
+# Get the IPv4 address of the container
+# 获取容器的 IPv4 地址
+get_container_ip() {
+    local container_name=\$1
+    docker inspect "\$container_name" | jq -r '.[0].NetworkSettings.Networks | to_entries | .[0].value.IPAddress'
+}
+
+# Get the host port mapped to the container
+# 获取容器映射到宿主机的端口
+get_host_port() {
+    local container_name=\$1
+    local container_port=\$2
+    docker inspect "\$container_name" | jq -r --arg port "\$container_port/tcp" '.[0].NetworkSettings.Ports[$port][0].HostPort'
+}
+
+# Maximum wait time is 240 seconds, check every 1 second
+# 最大等待时间为 240 秒，每 1 秒检查一次
+MAX_WAIT=240
+INTERVAL=1
+TIME_WAITED=0
+
+# Define container names and port mappings
+# 定义容器名称和端口映射
+declare -A CONTAINERS
+CONTAINERS=(
+    ["tools-80"]="80"
+    # Add more containers and ports
+    # 添加更多容器和端口
+)
+
+# Create ipset address set (if it doesn't exist)
+# 创建 ipset 地址合集（如果不存在）
+ipset list allowed_ipv4_ips &> /dev/null || ipset create allowed_ipv4_ips hash:ip
+
+# Manually add IP addresses to the ipset set (if not already present)
+# 手动添加 IP 地址到 ipset 合集（如果未存在）
+ipset add allowed_ipv4_ips IP addresses 2>/dev/null || true
+
+# Wait for the iptables DOCKER-USER chain to be available
+# 等待 iptables DOCKER-USER 链可用
+while [ \$TIME_WAITED -lt \$MAX_WAIT ]; do
+    if iptables -L DOCKER-USER &> /dev/null; then
+        for key in "\${!CONTAINERS[@]}"; do
+            # Separate container name and port
+            # 分离容器名称和端口
+            container_name=\$(echo \$key | sed 's/-[0-9]*$//')
+            container_port=\${CONTAINERS[\$key]}
+
+            # Get the container's IPv4 address
+            # 获取容器的 IPv4 地址
+            CONTAINER_IP=\$(get_container_ip "\$container_name")
+
+            # Skip containers that cannot get an IP address
+            # 跳过无法获取 IP 地址的容器
+            [ -z "\$CONTAINER_IP" ] && continue
+
+            # Get the host port mapped to the container
+            # 获取容器映射到宿主机的端口
+            HOST_PORT=\$(get_host_port "\$container_name" "\$container_port")
+
+            # Skip containers that cannot get the host port
+            # 跳过无法获取宿主机端口的容器
+            [ -z "\$HOST_PORT" ] && continue
+
+            # Generate unquoted comment
+            # 生成不带引号的注释
+            COMMENT_ESCAPED="Svc:\${container_name}_Port:\${HOST_PORT}"
+
+            # Generate iptables rules
+            # 生成 iptables 规则
+            ACCEPT_RULE="-m set --match-set allowed_ipv4_ips src -d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT_ESCAPED -j ACCEPT"
+            DROP_RULE="-d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT_ESCAPED -j DROP"
+
+            # Remove existing duplicate rules
+            # 删除现有的重复规则
+            while iptables -D DOCKER-USER \$ACCEPT_RULE &> /dev/null; do :; done
+            while iptables -D DOCKER-USER \$DROP_RULE &> /dev/null; do :; done
+
+            # Insert DROP rule first, then insert ACCEPT rule
+            # 先插入 DROP 规则，然后插入 ACCEPT 规则
+            iptables -I DOCKER-USER \$DROP_RULE
+            iptables -I DOCKER-USER \$ACCEPT_RULE
+        done
+
+        # Display success message
+        # 提示成功消息
+        echo -e "${GREEN}iptables rules have been successfully set${NC}"
+        exit 0
+    fi
+    sleep \$INTERVAL
+    TIME_WAITED=\$((TIME_WAITED + INTERVAL))
+done
+
+# Display timeout message
+# 提示超时消息
+echo -e "${RED}Timeout waiting for iptables DOCKER-USER chain${NC}"
+
+exit 1
+
+EOF
+
+    chmod +x /root/add_ipv4_ips.sh
+
+    # Create a systemd service to run scripts on startup
+    # 创建 systemd 服务以在启动时运行脚本
+    cat <<EOF > /etc/systemd/system/add_ipv4_ips.service
+[Unit]
+Description=Add IP addresses to ipset for Docker containers
+After=docker.service
+
+[Service]
+ExecStart=/bin/bash /root/add_ipv4_ips.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    systemctl daemon-reload
+    systemctl enable add_ipv4_ips.service
+    systemctl start add_ipv4_ips.service
+	
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用。请确保根据上述提示修改 /root/add_ipv4_ips.sh 文件。${NC}】"
+    else
+        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled. Please make sure to modify /root/add_ipv4_ips.sh as per the instructions above.${NC}】"
+    fi
+	
+    # Display IPSET addresses
+    # 显示 IPSET 地址
+    show_docker_ipv4_ipset
+}
+
+# Create Docker firewall rules that support IPv4 and IPv6
+# 创建支持 IPv4 和 IPv6 的 Docker 防火墙规则
+create_dual_stack_rules() {
+    # Check if /root/add_ips.sh already exists
+    # 检查 /root/add_ips.sh 是否已经存在
+    if [ -f /root/add_ips.sh ]; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}/root/add_ips.sh ${NC}文件已存在，无需重复创建。】"
+        else
+            echo -e "【${RED}/root/add_ips.sh ${NC}file already exists, no need to recreate.】"
+        fi
+        return
+    fi
+
+    # Create the add_ips.sh script
+    # 创建 add_ips.sh 脚本
+    cat <<EOF > /root/add_ips.sh
+#!/bin/bash
+
+# Tip: Modify your network name here
+# 提示：请在这里修改您的网络名称
+# Change "my-net-ipv6" to your actual Docker network name
+# 请将 "my-net-ipv6" 修改为您实际的 Docker 网络名称
+NETWORK_NAME="my-net-ipv6"
+
+# Get the IPv4 address of the container
+# 获取容器的 IPv4 地址
+get_container_ip() {
+    local container_name=\$1
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].IPAddress'
+}
+
+# Get the IPv6 address of the container
+# 获取容器的 IPv6 地址
+get_container_ipv6() {
+    local container_name=\$1
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].GlobalIPv6Address'
+}
+
+# Get the host port mapped to the container
+# 获取容器映射到宿主的端口
+get_host_port() {
+    local container_name=\$1
+    local container_port=\$2
+    docker port \$container_name \$container_port | cut -d ':' -f 2
+}
+
+# Maximum wait time is 240 seconds, check every 1 second
+# 最大等待时间为 240 秒，每 1 秒检查一次
+MAX_WAIT=240
+INTERVAL=1
+TIME_WAITED=0
+
+# Tip: Define container names and ports here
+# 提示：请在这里定义容器名称和端口
+# Replace with your actual container names and ports
+declare -A CONTAINERS
+CONTAINERS=(
+    ["nextcloud-aio-mastercontainer-8080"]="8080"
+    ["dashboard-dashboard-1-5555"]="5555"
+    # Add more containers and ports
+    # 添加更多容器和端口
+)
+
+# Tip: Create your needed ipset address sets here
+# 提示：请在这里创建您需要的 ipset 地址合集
+# Ensure the ipset address sets meet your security requirements
+# 确保以下 ipset 地址合集符合您的安全需求
+ipset list allowed_ips &> /dev/null || ipset create allowed_ips hash:ip
+ipset list allowed_ipv6_ips &> /dev/null || ipset create allowed_ipv6_ips hash:ip family inet6
+ipset list allowed_nezha_ips &> /dev/null || ipset create allowed_nezha_ips hash:ip
+ipset list allowed_nezha_ipv6_ips &> /dev/null || ipset create allowed_nezha_ipv6_ips hash:ip family inet6
+
+# Tip: Manually add IP addresses to ipset sets here
+# 提示：请在这里手动添加 IP 地址到 ipset 合集
+# Replace the IP addresses with those you need
+# 将以下 IP 地址修改为您需要的 IP 地址
+ipset add allowed_ips IP addresses 2>/dev/null || true
+ipset add allowed_ipv6_ips IP addresses 2>/dev/null || true
+ipset add allowed_nezha_ips IP addresses 2>/dev/null || true
+ipset add allowed_nezha_ipv6_ips IP addresses 2>/dev/null || true
+
+for key in "\${!CONTAINERS[@]}"; do
+    # Split container name and port
+    # 分离容器名称和端口
+    container_name=\$(echo \$key | sed 's/-[0-9]*\$//')
+    container_port=\${CONTAINERS[\$key]}
+    host_port=\$(get_host_port \$container_name \$container_port)
+
+    # Get container IPv4 and IPv6 addresses
+    # 获取容器的 IPv4 和 IPv6 地址
+    CONTAINER_IP=\$(get_container_ip \$container_name)
+    CONTAINER_IPV6=\$(get_container_ipv6 \$container_name)
+
+    if [ -z "\$CONTAINER_IP" ] || [ -z "\$CONTAINER_IPV6" ]; then
+        continue
+    fi
+
+    # Generate unquoted comment
+    # 生成不带引号的注释
+    COMMENT="Svc:\${container_name}_Port:\${host_port}"
+
+    if [[ "\$key" == "nextcloud-aio-mastercontainer-8080" ]]; then
+        # Only add DROP rules
+        # 仅添加 DROP 规则
+        DROP_RULE_IPV4="-d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+        DROP_RULE_IPV6="-d \$CONTAINER_IPV6 -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+
+        # Remove potential duplicate rules
+        # 删除可能存在的重复规则
+        while iptables -D DOCKER-USER \$DROP_RULE_IPV4 2>/dev/null; do :; done
+        while ip6tables -D DOCKER-USER \$DROP_RULE_IPV6 2>/dev/null; do :; done
+
+        iptables -I DOCKER-USER 1 \$DROP_RULE_IPV4
+        ip6tables -I DOCKER-USER 1 \$DROP_RULE_IPV6
+
+    else
+        if [[ "\$container_name" == "dashboard-dashboard-1" && "\$container_port" == "5555" ]]; then
+            # Define Nezha rules
+            # 定义 Nezha 规则
+            ACCEPT_RULE_IPV4="-m set --match-set allowed_nezha_ips src -d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j ACCEPT"
+            DROP_RULE_IPV4="-d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+
+            # Remove potential duplicate rules
+            # 删除可能存在的重复规则
+            while iptables -D DOCKER-USER \$DROP_RULE_IPV4 2>/dev/null; do :; done
+            while iptables -D DOCKER-USER \$ACCEPT_RULE_IPV4 2>/dev/null; do :; done
+
+            iptables -I DOCKER-USER 1 \$ACCEPT_RULE_IPV4
+            iptables -I DOCKER-USER 2 \$DROP_RULE_IPV4
+
+            ACCEPT_RULE_IPV6="-m set --match-set allowed_nezha_ipv6_ips src -d \$CONTAINER_IPV6 -p tcp --dport \$container_port -m comment --comment \$COMMENT -j ACCEPT"
+            DROP_RULE_IPV6="-d \$CONTAINER_IPV6 -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+
+            # Remove potential duplicate rules
+            # 删除可能存在的重复规则
+            while ip6tables -D DOCKER-USER \$DROP_RULE_IPV6 2>/dev/null; do :; done
+            while ip6tables -D DOCKER-USER \$ACCEPT_RULE_IPV6 2>/dev/null; do :; done
+
+            ip6tables -I DOCKER-USER 1 \$ACCEPT_RULE_IPV6
+            ip6tables -I DOCKER-USER 2 \$DROP_RULE_IPV6
+
+        else
+            # Define standard rules
+            # 定义常规规则
+            ACCEPT_RULE_IPV4="-m set --match-set allowed_ips src -d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j ACCEPT"
+            DROP_RULE_IPV4="-d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+
+            # Remove potential duplicate rules
+            # 删除可能存在的重复规则
+            while iptables -D DOCKER-USER \$DROP_RULE_IPV4 2>/dev/null; do :; done
+            while iptables -D DOCKER-USER \$ACCEPT_RULE_IPV4 2>/dev/null; do :; done
+
+            iptables -I DOCKER-USER 1 \$ACCEPT_RULE_IPV4
+            iptables -I DOCKER-USER 2 \$DROP_RULE_IPV4
+
+            ACCEPT_RULE_IPV6="-m set --match-set allowed_ipv6_ips src -d \$CONTAINER_IPV6 -p tcp --dport \$container_port -m comment --comment \$COMMENT -j ACCEPT"
+            DROP_RULE_IPV6="-d \$CONTAINER_IPV6 -p tcp --dport \$container_port -m comment --comment \$COMMENT -j DROP"
+
+            # Remove potential duplicate rules
+            # 删除可能存在的重复规则
+            while ip6tables -D DOCKER-USER \$DROP_RULE_IPV6 2>/dev/null; do :; done
+            while ip6tables -D DOCKER-USER \$ACCEPT_RULE_IPV6 2>/dev/null; do :; done
+
+            ip6tables -I DOCKER-USER 1 \$ACCEPT_RULE_IPV6
+            ip6tables -I DOCKER-USER 2 \$DROP_RULE_IPV6
+        fi
+    fi
+done
+
+exit 0
+EOF
+
+    chmod +x /root/add_ips.sh
+
+    # Create a systemd service to run scripts on startup
+    # 创建 systemd 服务以在启动时运行脚本
+    cat <<EOF > /etc/systemd/system/add_ips.service
+[Unit]
+Description=Add IP addresses to ipset for Docker containers
+After=docker.service
+
+[Service]
+ExecStart=/bin/bash /root/add_ips.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    systemctl daemon-reload
+    systemctl enable add_ips.service
+    systemctl start add_ips.service
+	
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用。请确保根据上述提示修改 /root/add_ips.sh 文件。${NC}】"
+    else
+        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled. Please make sure to modify /root/add_ips.sh as per the instructions above.${NC}】"
+    fi
+	
+    # Display IPSET addresses
+    # 显示 IPSET 地址	
+    show_docker_ipv4_ipv6_ipset
+}
+
 # Main menu cycle
 # 主菜单循环
 while true; do
@@ -1163,12 +1907,15 @@ while true; do
     read choice
     case $choice in
         01)
-            manage_firewall
+            check_docker_installed
             ;;
         02)
-            manage_ssh_firewall
+            manage_firewall
             ;;
         03)
+            manage_ssh_firewall
+            ;;
+        04)
             if [ "$LANGUAGE" = "CN" ]; then
                 show_progress "【${BLUE}查看${YELLOW} IPv4 Docker ${BLUE}用户链规则${NC}】"
             else
@@ -1176,7 +1923,7 @@ while true; do
             fi
             iptables -L DOCKER-USER -n --line-numbers | output_command
             ;;
-        04)
+        05)
             if [ "$LANGUAGE" = "CN" ]; then
                 show_progress "【${BLUE}查看${YELLOW} IPv6 Docker ${BLUE}用户链规则${NC}】"
             else
@@ -1184,7 +1931,7 @@ while true; do
             fi
             ip6tables -L DOCKER-USER -n --line-numbers | output_command
             ;;
-        05)
+        06)
             if [ "$LANGUAGE" = "CN" ]; then
                 show_progress "【${BLUE}查看${YELLOW} IPv4 Docker NAT ${BLUE}规则${NC}】"
             else
@@ -1192,7 +1939,7 @@ while true; do
             fi
             iptables -t nat -L POSTROUTING -n --line-numbers | output_command
             ;;
-        06)
+        07)
             if [ "$LANGUAGE" = "CN" ]; then
                 show_progress "【${BLUE}查看${YELLOW} IPv6 Docker NAT ${BLUE}规则${NC}】"
             else
@@ -1200,10 +1947,10 @@ while true; do
             fi
             ip6tables -t nat -L POSTROUTING -n --line-numbers | output_command
             ;;
-        07)
-            manage_screen 
+        08)
+            manage_screen
             ;;
-        17)
+        18)
             if [ "$LANGUAGE" = "EN" ]; then
                 echo -e "【${BLUE}Please select language${NC}】 / 【${BLUE}请选择语言${NC}】"
                 echo -e "【${BLUE}1${NC}】【${YELLOW}English${NC}】"
@@ -1248,14 +1995,14 @@ while true; do
                     ;;
             esac
             ;;
-        18)
-            update_script 
-            ;;
         19)
-            view_change_log 
+            update_script
+            ;;
+        20)
+            view_change_log
             ;;
         00)
-            exit_script 
+            exit_script
             ;;
         *)
             if [ "$LANGUAGE" = "CN" ]; then
