@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v1.6"
+VERSION="v1.7"
 
 # Define color
 # 定义颜色
@@ -86,6 +86,8 @@ show_menu() {
         echo -e "【${BLUE}06${NC}】【${BLUE}查看${YELLOW} iptables IPv4 Docker NAT ${BLUE}规则${NC}】"
         echo -e "【${BLUE}07${NC}】【${BLUE}查看${YELLOW} ip6tables IPv6 Docker NAT ${BLUE}规则${NC}】"
         echo -e "【${BLUE}08${NC}】【${BLUE}系统会话保持 ${YELLOW}screen ${BLUE}工具管理${NC}】"
+        echo -e "【${BLUE}09${NC}】【${BLUE}常用系统命令${NC}】"
+		echo -e "【${BLUE}10${NC}】【${BLUE}显示 ${YELLOW}Docker ${BLUE}容器信息${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}18${NC}】【${RED}切换脚本显示语言${NC}】【${YELLOW}Switch script language${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -109,6 +111,8 @@ show_menu() {
         echo -e "【${BLUE}06${NC}】【${BLUE}View ${YELLOW}iptables IPv4 Docker NAT ${BLUE}rules${NC}】"
         echo -e "【${BLUE}07${NC}】【${BLUE}View ${YELLOW}ip6tables IPv6 Docker NAT ${BLUE}rules${NC}】"
         echo -e "【${BLUE}08${NC}】【${BLUE}System session management with ${YELLOW}screen ${BLUE}tool${NC}】"
+        echo -e "【${BLUE}09${NC}】【${BLUE}Common system commands${NC}】"
+		echo -e "【${BLUE}10${NC}】【${BLUE}Show ${YELLOW}Docker ${BLUE}Container Info${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}18${NC}】【${RED}Switch script language${NC}】【${YELLOW}切换脚本显示语言${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -120,6 +124,255 @@ show_menu() {
     fi
 }
 
+# show_docker_container_info
+# Display Docker container information
+# 根据语言显示命令信息
+show_docker_container_info() {
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${BLUE}执行命令${NC}】【${BLUE}显示 ${YELLOW}Docker ${BLUE}容器信息${NC}】"
+    else
+        echo -e "【${BLUE}Command${NC}】【${BLUE}Show ${YELLOW}Docker ${BLUE}Container Info${NC}】"
+    fi
+
+    # 临时文件用于存储容器详情
+    # Temporary files to store container details
+    temp_file=$(mktemp)
+    long_ports_file=$(mktemp)
+
+    # 打印列标题的函数
+    # Function to print column headers
+    print_header() {
+        echo -e "${BLUE}================================================================================================================================================================${NC}"
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "${RED}容器名称                         ${BLUE}网络名称               ${YELLOW}IPv4地址          ${YELLOW}IPv6地址          ${RED}容器状态          ${GREEN}端口信息${NC}"
+        else
+            echo -e "${RED}Container Name                   ${BLUE}Network Name           ${YELLOW}IPv4 Address      ${YELLOW}IPv6 Address      ${RED}Container Status  ${GREEN}Port Information${NC}"
+        fi
+    }
+
+    # 打印标题
+    # Print headers
+    print_header
+
+    # 获取所有网络ID
+    # Get all network IDs
+    docker network ls -q | while read network_id; do
+        network_name=$(docker network inspect --format '{{.Name}}' "$network_id")
+
+        # 如果没有获取到网络名称，跳过这个分组
+        # If network name is not retrieved, skip this group
+        if [ -z "$network_name" ]; then
+            continue
+        fi
+
+        # 打印分隔线
+        # Print separator line
+        echo -e "${BLUE}================================================================================================================================================================${NC}"
+
+        docker network inspect "$network_id" --format '{{json .Containers}}' | jq -r '
+            to_entries[] |
+            .value |
+            "\(.Name) \(.IPv4Address // "") \(.IPv6Address // "")"
+        ' | while read container_name ipv4 ipv6; do
+            # 确保使用完整的容器ID
+            # Ensure using full container ID
+            container_id=$(docker ps --filter "name=^/${container_name}$" --format "{{.ID}}")
+            container_id=${container_id:-""}
+
+            network_mode=$(docker inspect --format '{{.HostConfig.NetworkMode}}' "$container_id" 2>/dev/null || echo "")
+
+            if [ "$network_mode" = "host" ]; then
+                ports="Host network - no port mappings"
+            elif [ -n "$network_mode" ]; then
+                # 获取端口映射，避免重复获取
+                # Get port mappings, avoiding duplicate retrieval
+                ports=$(docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{if $conf}}{{range $v := $conf}}{{if or (eq (index $v "HostIp") "0.0.0.0") (eq (index $v "HostIp") "::")}}{{index $v "HostIp"}}:{{index $v "HostPort"}}->{{$p}}, {{end}}{{end}}{{end}}{{end}}' "$container_id" | sort | uniq | sed 's/, $//')
+                ports=${ports:-""}
+            else
+                ports=""
+            fi
+
+            status=$(docker inspect --format '{{.State.Status}}' "$container_id" 2>/dev/null || echo "")
+            health_status=$(docker inspect --format '{{.State.Health.Status}}' "$container_id" 2>/dev/null || echo "")
+
+            if [ -n "$health_status" ]; then
+                status="$status($health_status)"
+            fi
+
+            # 确定端口信息是否过长
+            # Determine if port information is considered long
+            comma_count=$(echo "$ports" | grep -o ',' | wc -l)
+            max_comma_count=1
+            if [ $comma_count -gt $max_comma_count ]; then
+                echo "$container_name $network_name $ipv4 $ipv6 $status $ports" >> "$long_ports_file"
+            else
+                printf "%-40b  %-30b  %-25b  %-25b  %-25b  %b%s\n" \
+                    "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${RED}$status${NC}" "${GREEN}$ports${NC}" >> "$temp_file"
+            fi
+        done
+
+        # 将短条目按容器名称排序后显示
+        # Sort short entries by container name and display
+        sort -k1,1 "$temp_file"
+
+        # 显示超长条目，按照条目长度从短到长显示
+        # Display long entries sorted by length (shortest first)
+        sort -k6,6 -r "$long_ports_file" | while IFS= read -r line; do
+            IFS=' ' read -r container_name network_name ipv4 ipv6 status ports <<< "$line"
+            printf "%-40b  %-30b  %-25b  %-25b  %-25b  %b%s\n" \
+                "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${RED}$status${NC}" "${GREEN}$ports${NC}"
+        done
+
+        # 清空临时文件
+        # Clear temporary files
+        > "$temp_file"
+        > "$long_ports_file"
+    done
+
+    # 清理临时文件
+    # Clean up temporary files
+    rm "$temp_file" "$long_ports_file"
+
+        echo -e "${BLUE}================================================================================================================================================================${NC}"
+}
+
+# Show system commands submenu function
+# 显示常用系统命令子菜单函数
+show_system_commands() {
+    while true; do
+        clear
+        echo -e "${BLUE}================================================================================${NC}"
+        
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}常用系统命令${NC}】"
+            echo -e "${BLUE}================================================================================${NC}"
+            echo -e "【${BLUE}01${NC}】【${BLUE}显示磁盘使用情况${NC}】【${YELLOW}df -h -x overlay -x tmpfs${NC}】"
+            echo -e "【${BLUE}02${NC}】【${BLUE}显示主机信息${NC}】【${YELLOW}hostnamectl${NC}】"
+            echo -e "【${BLUE}03${NC}】【${BLUE}显示所有Docker容器${NC}】【${YELLOW}docker ps -a${NC}】"
+            echo -e "【${BLUE}04${NC}】【${BLUE}显示内存使用情况${NC}】【${YELLOW}free -m${NC}】"
+            echo -e "【${BLUE}05${NC}】【${BLUE}重启Docker服务${NC}】【${YELLOW}systemctl restart docker${NC}】"
+            echo -e "【${BLUE}06${NC}】【${BLUE}显示Docker版本信息${NC}】【${YELLOW}docker version${NC}】"
+            echo -e "【${BLUE}07${NC}】【${BLUE}更新并升级系统${NC}】【${YELLOW}apt-get update && apt-get upgrade${NC}】"
+            echo -e "【${BLUE}08${NC}】【${BLUE}显示当前登录用户信息${NC}】【${YELLOW}who -u${NC}】"
+            echo -e "【${BLUE}09${NC}】【${BLUE}重新启动系统${NC}】【${YELLOW}reboot${NC}】"
+            echo -e "【${BLUE}00${NC}】【${RED}返回主菜单${NC}】"
+            echo -e "${BLUE}================================================================================${NC}"
+        else
+            echo -e "【${RED}System Commands${NC}】"
+            echo -e "${BLUE}================================================================================${NC}"
+            echo -e "【${BLUE}01${NC}】【${BLUE}Show disk usage${NC}】【${YELLOW}df -h -x overlay -x tmpfs${NC}】"
+            echo -e "【${BLUE}02${NC}】【${BLUE}Show host information${NC}】【${YELLOW}hostnamectl${NC}】"
+            echo -e "【${BLUE}03${NC}】【${BLUE}Show all Docker containers${NC}】【${YELLOW}docker ps -a${NC}】"
+            echo -e "【${BLUE}04${NC}】【${BLUE}Show memory usage${NC}】【${YELLOW}free -m${NC}】"
+            echo -e "【${BLUE}05${NC}】【${BLUE}Restart Docker service${NC}】【${YELLOW}systemctl restart docker${NC}】"
+            echo -e "【${BLUE}06${NC}】【${BLUE}Show Docker version${NC}】【${YELLOW}docker version${NC}】"
+            echo -e "【${BLUE}07${NC}】【${BLUE}Update and upgrade system${NC}】【${YELLOW}apt-get update && apt-get upgrade${NC}】"
+            echo -e "【${BLUE}08${NC}】【${BLUE}Show current user information${NC}】【${YELLOW}who -u${NC}】"
+            echo -e "【${BLUE}09${NC}】【${BLUE}Reboot system${NC}】【${YELLOW}reboot${NC}】"
+            echo -e "【${BLUE}00${NC}】【${RED}Return to main menu${NC}】"
+            echo -e "${BLUE}================================================================================${NC}"
+        fi
+
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -ne "【${RED}输入选项编号并按回车确认${NC}】"
+        else
+            echo -ne "【${RED}Enter option number and press Enter to confirm${NC}】"
+        fi
+        read sys_cmd_choice
+        case $sys_cmd_choice in
+            01)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示磁盘使用情况 (df -h -x overlay -x tmpfs)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show disk usage (df -h -x overlay -x tmpfs)${NC}】"
+                fi
+                df -h -x overlay -x tmpfs
+                ;;
+            02)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示主机信息 (hostnamectl)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show host information (hostnamectl)${NC}】"
+                fi
+                hostnamectl
+                ;;
+            03)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示所有Docker容器 (docker ps -a)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show all Docker containers (docker ps -a)${NC}】"
+                fi
+                docker ps -a
+                ;;
+            04)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示内存使用情况 (free -m)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show memory usage (free -m)${NC}】"
+                fi
+                free -m
+                ;;
+            05)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 重启Docker服务 (systemctl restart docker)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Restart Docker service (systemctl restart docker)${NC}】"
+                fi
+                systemctl restart docker
+                ;;
+            06)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示Docker版本信息 (docker version)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show Docker version (docker version)${NC}】"
+                fi
+                docker version
+                ;;
+            07)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 更新并升级系统 (apt-get update && apt-get upgrade)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Update and upgrade system (apt-get update && apt-get upgrade)${NC}】"
+                fi
+                apt-get update && apt-get upgrade
+                ;;
+            08)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 显示当前登录用户信息 (who -u)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Show current user information (who -u)${NC}】"
+                fi
+                who -u
+                ;;
+            09)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${BLUE}执行命令: 重新启动系统 (reboot)${NC}】"
+                else
+                    echo -e "【${BLUE}Command: Reboot system (reboot)${NC}】"
+                fi
+                reboot
+                ;;
+            00)
+                break
+                ;;
+            *)
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${RED}无效选项${NC}】"
+                else
+                    echo -e "【${RED}Invalid option${NC}】"
+                fi
+                ;;
+        esac
+        
+        # Prompt user to return to the submenu
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -ne "【${RED}按回车键返回子菜单${NC}】"
+        else
+            echo -ne "【${RED}Press Enter to return to the submenu${NC}】"
+        fi
+        read -r
+    done
+}
 
 # Manage screen tool function
 # 管理 screen 工具的函数
@@ -1317,7 +1570,21 @@ check_docker_installed() {
         if [[ $docker_choice == "1" ]]; then
             manage_docker_firewall
         elif [[ $docker_choice == "2" ]]; then
-            create_docker_rules
+            if [ "$LANGUAGE" = "CN" ]; then
+                read -p "是否创建配置文件？(y/n): " user_choice
+            else
+                read -p "Do you want to create the configuration file? (y/n): " user_choice
+            fi
+
+            if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
+                create_docker_rules
+            else
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                else
+                    echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                fi
+            fi
         else
             if [ "$LANGUAGE" = "CN" ]; then
                 echo -e "【${RED}无效选项${NC}】【${YELLOW}返回主菜单${NC}】"
@@ -1373,14 +1640,30 @@ manage_docker_firewall() {
                         else
                             echo -e "【${GREEN}IPv4 rule file found and modifying it${NC}】"
                         fi
-                    modify_docker_ipv4_rules
+                        modify_docker_ipv4_rules
                     else
                         if [ "$LANGUAGE" = "CN" ]; then
-                            echo -e "【${RED}未检测到 IPv4 规则文件或服务${NC}】【${RED}开始创建${NC}】"
+                            echo -e "【${RED}未检测到 IPv4 规则文件或服务${NC}】"
+                            read -p "是否创建配置文件？(y/n): " user_choice
                         else
-                            echo -e "【${RED}IPv4 rule file or service not detected${NC}】【${RED}Starting creation${NC}】"
+                            echo -e "【${RED}IPv4 rule file or service not detected${NC}】"
+                            read -p "Do you want to create the configuration file? (y/n): " user_choice
                         fi
-                        create_docker_rules
+
+                        if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${RED}开始创建${NC}】"
+                            else
+                                echo -e "【${RED}Starting creation${NC}】"
+                            fi
+                            create_docker_rules
+                        else
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                            else
+                                echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                            fi
+                        fi
                     fi
                     ;;
                 2)
@@ -1390,17 +1673,34 @@ manage_docker_firewall() {
                         else
                             echo -e "【${GREEN}IPv4 and IPv6 rule file found and modifying it${NC}】"
                         fi
-                    modify_docker_ipv6_rules
+                        modify_docker_ipv6_rules
                     else
                         if [ "$LANGUAGE" = "CN" ]; then
-                            echo -e "【${RED}未检测到 IPv4 和 IPv6 规则文件或服务${NC}】【${RED}开始创建${NC}】"
+                            echo -e "【${RED}未检测到 IPv4 和 IPv6 规则文件或服务${NC}】"
+                            read -p "是否创建配置文件？(y/n): " user_choice
                         else
-                            echo -e "【${RED}IPv4 and IPv6 rule file or service not detected${NC}】【${RED}Starting creation${NC}】"
+                            echo -e "【${RED}IPv4 and IPv6 rule file or service not detected${NC}】"
+                            read -p "Do you want to create the configuration file? (y/n): " user_choice
                         fi
-                        create_docker_rules
+
+                        if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${RED}开始创建${NC}】"
+                            else
+                                echo -e "【${RED}Starting creation${NC}】"
+                            fi
+                            create_docker_rules
+                        else
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                            else
+                                echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                            fi
+                        fi
                     fi
                     ;;
             esac
+
             ;;
         *)
             if [ "$LANGUAGE" = "CN" ]; then
@@ -1680,9 +1980,9 @@ EOF
     systemctl start add_ipv4_ips.service
 	
     if [ "$LANGUAGE" = "CN" ]; then
-        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用。请确保根据上述提示修改 /root/add_ipv4_ips.sh 文件。${NC}】"
+        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用${NC}】【${YELLOW}请确保根据需求修改 /root/add_ipv4_ips.sh 文件关键信息${NC}】"
     else
-        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled. Please make sure to modify /root/add_ipv4_ips.sh as per the instructions above.${NC}】"
+        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled${NC}】【${YELLOW}Please ensure to modify the key information in the /root/add_ipv4_ips.sh file as needed${NC}】"
     fi
 	
     # Display IPSET addresses
@@ -1885,9 +2185,9 @@ EOF
     systemctl start add_ips.service
 	
     if [ "$LANGUAGE" = "CN" ]; then
-        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用。请确保根据上述提示修改 /root/add_ips.sh 文件。${NC}】"
+        echo -e "【${GREEN}Docker 防火墙规则已成功创建并启用${NC}】【${YELLOW}请确保根据需求修改 /root/add_ips.sh 文件关键信息${NC}】"
     else
-        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled. Please make sure to modify /root/add_ips.sh as per the instructions above.${NC}】"
+        echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled${NC}】【${YELLOW}Please ensure to modify the key information in the /root/add_ips.sh file as needed${NC}】"
     fi
 	
     # Display IPSET addresses
@@ -1950,6 +2250,12 @@ while true; do
         08)
             manage_screen
             ;;
+        09)
+            show_system_commands
+            ;;
+        10)
+            show_docker_container_info
+            ;;		
         18)
             if [ "$LANGUAGE" = "EN" ]; then
                 echo -e "【${BLUE}Please select language${NC}】 / 【${BLUE}请选择语言${NC}】"
