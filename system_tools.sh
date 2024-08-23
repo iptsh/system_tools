@@ -125,6 +125,8 @@ show_menu() {
 }
 
 # show_docker_container_info
+# 显示 Docker 容器信息
+
 # Display Docker container information
 # 根据语言显示命令信息
 show_docker_container_info() {
@@ -144,9 +146,9 @@ show_docker_container_info() {
     print_header() {
         echo -e "${BLUE}================================================================================================================================================================${NC}"
         if [ "$LANGUAGE" = "CN" ]; then
-            echo -e "${RED}容器名称                         ${BLUE}网络名称               ${YELLOW}IPv4地址          ${YELLOW}IPv6地址          ${RED}容器状态          ${GREEN}端口信息${NC}"
+            echo -e "${RED}容器名称                         ${BLUE}网络名称               ${YELLOW}IPv4地址          ${YELLOW}IPv6地址          ${WHITE}容器状态          ${GREEN}端口信息${NC}"
         else
-            echo -e "${RED}Container Name                   ${BLUE}Network Name           ${YELLOW}IPv4 Address      ${YELLOW}IPv6 Address      ${RED}Container Status  ${GREEN}Port Information${NC}"
+            echo -e "${RED}Container Name                   ${BLUE}Network Name           ${YELLOW}IPv4 Address      ${YELLOW}IPv6 Address      ${WHITE}Container Status  ${GREEN}Port Information${NC}"
         fi
     }
 
@@ -207,7 +209,7 @@ show_docker_container_info() {
                 echo "$container_name $network_name $ipv4 $ipv6 $status $ports" >> "$long_ports_file"
             else
                 printf "%-40b  %-30b  %-25b  %-25b  %-25b  %b%s\n" \
-                    "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${RED}$status${NC}" "${GREEN}$ports${NC}" >> "$temp_file"
+                    "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${WHITE}$status${NC}" "${GREEN}$ports${NC}" >> "$temp_file"
             fi
         done
 
@@ -220,7 +222,7 @@ show_docker_container_info() {
         sort -k6,6 -r "$long_ports_file" | while IFS= read -r line; do
             IFS=' ' read -r container_name network_name ipv4 ipv6 status ports <<< "$line"
             printf "%-40b  %-30b  %-25b  %-25b  %-25b  %b%s\n" \
-                "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${RED}$status${NC}" "${GREEN}$ports${NC}"
+                "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${WHITE}$status${NC}" "${GREEN}$ports${NC}"
         done
 
         # 清空临时文件
