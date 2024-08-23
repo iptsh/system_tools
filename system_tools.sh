@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v1.7"
+VERSION="v1.8"
 
 # Define color
 # 定义颜色
@@ -136,13 +136,13 @@ show_docker_container_info() {
         echo -e "【${BLUE}Command${NC}】【${BLUE}Show ${YELLOW}Docker ${BLUE}Container Info${NC}】"
     fi
 
-    # 临时文件用于存储容器详情
     # Temporary files to store container details
+    # 临时文件用于存储容器详情
     temp_file=$(mktemp)
     long_ports_file=$(mktemp)
 
-    # 打印列标题的函数
     # Function to print column headers
+    # 打印列标题的函数
     print_header() {
         echo -e "${BLUE}================================================================================================================================================================${NC}"
         if [ "$LANGUAGE" = "CN" ]; then
@@ -152,23 +152,23 @@ show_docker_container_info() {
         fi
     }
 
-    # 打印标题
     # Print headers
+    # 打印标题
     print_header
 
-    # 获取所有网络ID
     # Get all network IDs
+    # 获取所有网络ID
     docker network ls -q | while read network_id; do
         network_name=$(docker network inspect --format '{{.Name}}' "$network_id")
 
-        # 如果没有获取到网络名称，跳过这个分组
         # If network name is not retrieved, skip this group
+        # 如果没有获取到网络名称，跳过这个分组
         if [ -z "$network_name" ]; then
             continue
         fi
 
-        # 打印分隔线
         # Print separator line
+        # 打印分隔线
         echo -e "${BLUE}================================================================================================================================================================${NC}"
 
         docker network inspect "$network_id" --format '{{json .Containers}}' | jq -r '
@@ -176,8 +176,8 @@ show_docker_container_info() {
             .value |
             "\(.Name) \(.IPv4Address // "") \(.IPv6Address // "")"
         ' | while read container_name ipv4 ipv6; do
-            # 确保使用完整的容器ID
             # Ensure using full container ID
+            # 确保使用完整的容器ID
             container_id=$(docker ps --filter "name=^/${container_name}$" --format "{{.ID}}")
             container_id=${container_id:-""}
 
@@ -186,8 +186,8 @@ show_docker_container_info() {
             if [ "$network_mode" = "host" ]; then
                 ports="Host network - no port mappings"
             elif [ -n "$network_mode" ]; then
-                # 获取端口映射，避免重复获取
                 # Get port mappings, avoiding duplicate retrieval
+                # 获取端口映射，避免重复获取
                 ports=$(docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{if $conf}}{{range $v := $conf}}{{if or (eq (index $v "HostIp") "0.0.0.0") (eq (index $v "HostIp") "::")}}{{index $v "HostIp"}}:{{index $v "HostPort"}}->{{$p}}, {{end}}{{end}}{{end}}{{end}}' "$container_id" | sort | uniq | sed 's/, $//')
                 ports=${ports:-""}
             else
@@ -201,8 +201,16 @@ show_docker_container_info() {
                 status="$status($health_status)"
             fi
 
-            # 确定端口信息是否过长
+
+            # If the field is empty, set it to "N/A"
+            # 如果字段为空，设置为 "N/A"
+            ipv4=${ipv4:-"N/A"}
+            ipv6=${ipv6:-"N/A"}
+            ports=${ports:-"N/A"}
+            status=${status:-"N/A"}
+
             # Determine if port information is considered long
+            # 确定端口信息是否过长
             comma_count=$(echo "$ports" | grep -o ',' | wc -l)
             max_comma_count=1
             if [ $comma_count -gt $max_comma_count ]; then
@@ -213,29 +221,29 @@ show_docker_container_info() {
             fi
         done
 
-        # 将短条目按容器名称排序后显示
         # Sort short entries by container name and display
+        # 将短条目按容器名称排序后显示
         sort -k1,1 "$temp_file"
 
-        # 显示超长条目，按照条目长度从短到长显示
         # Display long entries sorted by length (shortest first)
+        # 显示超长条目，按照条目长度从短到长显示
         sort -k6,6 -r "$long_ports_file" | while IFS= read -r line; do
             IFS=' ' read -r container_name network_name ipv4 ipv6 status ports <<< "$line"
             printf "%-40b  %-30b  %-25b  %-25b  %-25b  %b%s\n" \
                 "${RED}$container_name${NC}" "${BLUE}$network_name${NC}" "${YELLOW}$ipv4${NC}" "${YELLOW}$ipv6${NC}" "${WHITE}$status${NC}" "${GREEN}$ports${NC}"
         done
 
-        # 清空临时文件
         # Clear temporary files
+        # 清空临时文件
         > "$temp_file"
         > "$long_ports_file"
     done
 
-    # 清理临时文件
     # Clean up temporary files
+    # 清理临时文件
     rm "$temp_file" "$long_ports_file"
 
-        echo -e "${BLUE}================================================================================================================================================================${NC}"
+    echo -e "${BLUE}================================================================================================================================================================${NC}"
 }
 
 # Show system commands submenu function
