@@ -1076,6 +1076,17 @@ create_ssh_rules() {
         show_progress "【${BLUE}Creating${YELLOW} SSH ${BLUE}Firewall Rules${NC}】"
     fi
 
+    # Check if /root/add_ssh_ips.sh already exists
+    # 检查 /root/add_ssh_ips.sh 是否已经存在
+    if [ -f /root/add_ssh_ips.sh ]; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}文件已存在，无需重复创建。】"
+        else
+            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}file already exists, no need to recreate.】"
+        fi
+        return
+    fi
+	
     # Check and install ipset
     # 检查并安装ipset
     if ! command -v ipset &> /dev/null; then
@@ -1116,17 +1127,6 @@ create_ssh_rules() {
         read -p "【IPv4 addresses】" ipv4_addresses
         echo -e "【${RED}Please enter the${YELLOW} IPv6 ${RED}addresses allowed to access${YELLOW} SSH ${RED}${NC}】【${RED}Separate multiple addresses with spaces${NC}】"
         read -p "【IPv6 addresses】" ipv6_addresses
-    fi
-
-    # Check if /root/add_ssh_ips.sh already exists
-    # 检查 /root/add_ssh_ips.sh 是否已经存在
-    if [ -f /root/add_ssh_ips.sh ]; then
-        if [ "$LANGUAGE" = "CN" ]; then
-            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}文件已存在，无需重复创建。】"
-        else
-            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}file already exists, no need to recreate.】"
-        fi
-        return
     fi
 
     # Create the add_ssh_ips.sh script
@@ -1931,6 +1931,23 @@ create_ipv4_only_rules() {
         return
     fi
 
+    # Check and install ipset
+    # 检查并安装ipset
+    if ! command -v ipset &> /dev/null; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}检测出${YELLOW} ipset ${NC}未安装${NC}】【${RED}已经开始部署${NC}】"
+        else
+            echo -e "【${RED}Detected${YELLOW} ipset ${NC}is not installed${NC}】【${RED}Starting installation${NC}】"
+        fi
+        apt-get update && apt-get install -y ipset
+    else
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}发现当前${YELLOW} ipset ${GREEN}已存在${NC}】【已经跳过安装${NC}】"
+        else
+            echo -e "【${GREEN}Found existing${YELLOW} ipset ${GREEN}installed${NC}】【Skipping installation${NC}】"
+        fi
+    fi
+
     # Create the add_ipv4_ips.sh script
     # 创建 add_ipv4_ips.sh 脚本
     cat <<EOF > /root/add_ipv4_ips.sh
@@ -2083,6 +2100,23 @@ create_dual_stack_rules() {
         return
     fi
 
+    # Check and install ipset
+    # 检查并安装ipset
+    if ! command -v ipset &> /dev/null; then
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${RED}检测出${YELLOW} ipset ${NC}未安装${NC}】【${RED}已经开始部署${NC}】"
+        else
+            echo -e "【${RED}Detected${YELLOW} ipset ${NC}is not installed${NC}】【${RED}Starting installation${NC}】"
+        fi
+        apt-get update && apt-get install -y ipset
+    else
+        if [ "$LANGUAGE" = "CN" ]; then
+            echo -e "【${GREEN}发现当前${YELLOW} ipset ${GREEN}已存在${NC}】【已经跳过安装${NC}】"
+        else
+            echo -e "【${GREEN}Found existing${YELLOW} ipset ${GREEN}installed${NC}】【Skipping installation${NC}】"
+        fi
+    fi
+	
     # Create the add_ips.sh script
     # 创建 add_ips.sh 脚本
     cat <<EOF > /root/add_ips.sh
