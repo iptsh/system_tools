@@ -34,7 +34,7 @@ English | [简体中文](./README.zh-cn.md)
 
 ---
 
-#### 【v1.7】 Seventh Edition,Fixed logical errors in Docker firewall management options.Added a prompt to ask whether to create a configuration file.Added a submenu for common system commands.Added an option to the main menu for displaying Docker container information, which includes container name, network name, IPv4 address, IPv6 address, container status, and port mapping information.Improved the readability and aesthetic presentation of Docker container information display. (2024.08.22 Night)
+#### 【v1.7】 Seventh Edition, Fixed logical errors in Docker firewall management options.Added a prompt to ask whether to create a configuration file.Added a submenu for common system commands.Added an option to the main menu for displaying Docker container information, which includes container name, network name, IPv4 address, IPv6 address, container status, and port mapping information.Improved the readability and aesthetic presentation of Docker container information display. (2024.08.22 Night)
 
 ---
 
