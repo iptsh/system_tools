@@ -38,7 +38,7 @@ English | [简体中文](./README.zh-cn.md)
 
 ---
 
-#### 【v1.8】 In the eighth version, the container status content displayed in the Docker container information is changed to white. After the Manhattan mobile client code automatically wraps, it is difficult to distinguish it from the container name on the dock. When the content obtained by changing the Docker container information is empty, It can represent the character N/A so that no information is obtained to avoid possible confusion in the information column. (2024.08.23 PM)
+#### 【v1.8】 Eighth Edition, Changed the container status in Docker container information display to white, in order to avoid visual confusion with container names when the code automatically wraps on mobile clients.Modified the script so that when Docker container information is not retrieved, it displays the character "N/A" to represent missing information, preventing potential misalignment of information columns. (2024.08.23 PM)(2024.08.23 PM)
 
 ---
 
