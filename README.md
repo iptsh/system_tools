@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![Snipaste_2024-08-23_12-21-09](https://github.com/user-attachments/assets/51318df1-7b7d-4f98-b6de-7cc48b6e03ac)
+![Snipaste_2024-08-23_12-20-22](https://github.com/user-attachments/assets/f81b8430-76e9-44a4-8743-e54bc8ec4be9)
 
 ---
 
