@@ -977,24 +977,46 @@ manage_ssh_firewall() {
             elif [[ $modify_choice == "2" ]]; then
                 # Check for existing rules files or services
                 # 检查现有规则文件或服务
-                if [ -f "/root/add_ssh_ips.sh" ] && [ -f "/etc/systemd/system/add_ssh_ips.service" ]; then
+                if [ -f "/root/add_ssh_ips.sh" ]; then
                     if [ "$LANGUAGE" = "CN" ]; then
-                        echo -e "【${GREEN}已找到现有规则文件并对其进行修改${NC}】"
+                        echo -e "【${RED}现有规则文件已存在${NC}】"
+                        read -p "【是否要修改现有规则文件】【1】 是 【2】 否" modify_choice
+                        if [[ $modify_choice == "1" ]]; then
+                            # Call the function to modify existing rules
+                            # 调用修改函数
+                            modify_existing_rules
+                        else
+                            echo -e "【${BLUE}不进行修改${NC}】"
+                        fi
                     else
-                        echo -e "【${GREEN}Found existing rules files and modifying them${NC}】"
+                        echo -e "【${RED}Existing rules file already exists${NC}】"
+                        read -p "【Do you want to modify the existing rules file】【1】 Yes 【2】 No" modify_choice
+                        if [[ $modify_choice == "1" ]]; then
+                            # Call the function to modify existing rules
+                            # 调用修改函数
+                            modify_existing_rules
+                        else
+                            echo -e "【${BLUE}No modification${NC}】"
+                        fi
                     fi
-                    # Call the function to modify existing rules
-                    # 调用修改函数
-                    modify_existing_rules
                 else
                     if [ "$LANGUAGE" = "CN" ]; then
-                        echo -e "【${RED}检测出现有规则文件或服务不存在${NC}】【${RED}已经开始创建${NC}】"
+                        echo -e "【${RED}规则文件不存在${NC}】【${RED}开始创建新的规则文件${NC}】"
                     else
-                        echo -e "【${RED}Existing rules files or service not detected${NC}】【${RED}Starting creation${NC}】"
+                        echo -e "【${RED}Rules file not found${NC}】【${RED}Starting creation of new rules file${NC}】"
                     fi
-                    # Call the function to create SSH rules
-                    # 调用创建函数
-                    create_ssh_rules
+                    if [ "$LANGUAGE" = "CN" ]; then
+                        read -p "【是否要创建新的规则文件】【1】 是 【2】 否" create_choice
+                    else
+                        read -p "【Do you want to create a new rules file】【1】 Yes 【2】 No" create_choice
+                    fi
+                    if [[ $create_choice == "1" ]]; then
+                        # Call the function to create SSH rules
+                        # 调用创建函数
+                        create_ssh_rules
+                    else
+                        echo -e "【${BLUE}不进行创建${NC}】"
+                    fi
                 fi
             else
                 if [ "$LANGUAGE" = "CN" ]; then
@@ -1005,9 +1027,35 @@ manage_ssh_firewall() {
             fi
             ;;
         2)
-            # Call the function to create SSH rules
-            # 调用创建函数
-            create_ssh_rules
+            # Check if SSH rules file exists before creating
+            # 在创建之前检查 SSH 规则文件是否存在
+            if [ -f "/root/add_ssh_ips.sh" ]; then
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${RED}现有规则文件已存在${NC}】"
+                    read -p "【是否要修改现有规则文件】【1】 是 【2】 否" modify_choice
+                    if [[ $modify_choice == "1" ]]; then
+                        # Call the function to modify existing rules
+                        # 调用修改函数
+                        modify_existing_rules
+                    else
+                        echo -e "【${BLUE}不进行修改${NC}】"
+                    fi
+                else
+                    echo -e "【${RED}Existing rules file already exists${NC}】"
+                    read -p "【Do you want to modify the existing rules file】【1】 Yes 【2】 No" modify_choice
+                    if [[ $modify_choice == "1" ]]; then
+                        # Call the function to modify existing rules
+                        # 调用修改函数
+                        modify_existing_rules
+                    else
+                        echo -e "【${BLUE}No modification${NC}】"
+                    fi
+                fi
+            else
+                # Call the function to create SSH rules
+                # 调用创建函数
+                create_ssh_rules
+            fi
             ;;
         *)
             if [ "$LANGUAGE" = "CN" ]; then
@@ -1060,14 +1108,14 @@ create_ssh_rules() {
     # 让用户输入IPv4和IPv6地址
     if [ "$LANGUAGE" = "CN" ]; then
         echo -e "【${RED}请输入允许访问${YELLOW} SSH ${RED}的${YELLOW} IPv4 ${RED}地址${NC}】【${RED}可用空格分隔多个地址${NC}】"
-        read -p "【${YELLOW} IPv4 ${NC}地址】" ipv4_addresses
+        read -p "【IPv4 地址】" ipv4_addresses
         echo -e "【${RED}请输入允许访问${YELLOW} SSH ${RED}的${YELLOW} IPv6 ${RED}地址${NC}】【${RED}可用空格分隔多个地址${NC}】"
-        read -p "【${YELLOW} IPv6 ${NC}地址】" ipv6_addresses
+        read -p "【IPv6 地址】" ipv6_addresses
     else
         echo -e "【${RED}Please enter the${YELLOW} IPv4 ${RED}addresses allowed to access${YELLOW} SSH ${RED}${NC}】【${RED}Separate multiple addresses with spaces${NC}】"
-        read -p "【${YELLOW} IPv4 ${NC}addresses】" ipv4_addresses
+        read -p "【IPv4 addresses】" ipv4_addresses
         echo -e "【${RED}Please enter the${YELLOW} IPv6 ${RED}addresses allowed to access${YELLOW} SSH ${RED}${NC}】【${RED}Separate multiple addresses with spaces${NC}】"
-        read -p "【${YELLOW} IPv6 ${NC}addresses】" ipv6_addresses
+        read -p "【IPv6 addresses】" ipv6_addresses
     fi
 
     # Check if /root/add_ssh_ips.sh already exists
@@ -1611,10 +1659,10 @@ check_docker_installed() {
 manage_docker_firewall() {
     if [ "$LANGUAGE" = "CN" ]; then
         echo -e "【${YELLOW}请选择操作${NC}】\n【${BLUE}1${NC}】 ${BLUE}查看现有规则${NC}\n【${BLUE}2${NC}】 ${BLUE}修改现有规则${NC}"
-        read -p "【请输入选项】" modify_choice
+        read -p "请输入选项：" modify_choice
     else
         echo -e "【${YELLOW}Select an operation${NC}】\n【${BLUE}1${NC}】 ${BLUE}View existing rules${NC}\n【${BLUE}2${NC}】 ${BLUE}Modify existing rules${NC}"
-        read -p "【Enter your choice】" modify_choice
+        read -p "Enter your choice：" modify_choice
     fi
 
     case $modify_choice in
@@ -1627,7 +1675,7 @@ manage_docker_firewall() {
                         echo -e "【${BLUE}Viewing IPv4 firewall rules${NC}】"
                     fi
                     iptables -L DOCKER-USER -n --line-numbers | output_command
-					show_docker_ipv4_ipset
+                    show_docker_ipv4_ipset
                     ;;
                 2)
                     if [ "$LANGUAGE" = "CN" ]; then
@@ -1637,7 +1685,7 @@ manage_docker_firewall() {
                     fi
                     iptables -L DOCKER-USER -n --line-numbers | output_command
                     ip6tables -L DOCKER-USER -n --line-numbers | output_command
-					show_docker_ipv4_ipv6_ipset
+                    show_docker_ipv4_ipv6_ipset
                     ;;
             esac
             ;;
@@ -1646,32 +1694,43 @@ manage_docker_firewall() {
                 1)
                     if [ -f "/root/add_ipv4_ips.sh" ] && [ -f "/etc/systemd/system/add_ipv4_ips.service" ]; then
                         if [ "$LANGUAGE" = "CN" ]; then
-                            echo -e "【${GREEN}已找到 IPv4 规则文件并对其进行修改${NC}】"
+                            echo -e "【${GREEN}已找到 IPv4 规则文件${NC}】"
+                            read -p "是否要修改现有规则文件？【1】 是 【2】 否：" modify_choice
                         else
-                            echo -e "【${GREEN}IPv4 rule file found and modifying it${NC}】"
+                            echo -e "【${GREEN}IPv4 rule file found${NC}】"
+                            read -p "Do you want to modify the existing rules file? 【1】 Yes 【2】 No：" modify_choice
                         fi
-                        modify_docker_ipv4_rules
+
+                        if [[ "$modify_choice" == "1" ]]; then
+                            modify_docker_ipv4_rules
+                        else
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${YELLOW}已选择不修改现有规则文件${NC}】"
+                            else
+                                echo -e "【${YELLOW}Chose not to modify the existing rules file${NC}】"
+                            fi
+                        fi
                     else
                         if [ "$LANGUAGE" = "CN" ]; then
                             echo -e "【${RED}未检测到 IPv4 规则文件或服务${NC}】"
-                            read -p "是否创建配置文件？(y/n): " user_choice
+                            read -p "是否创建新的规则文件？【1】 是 【2】 否：" create_choice
                         else
                             echo -e "【${RED}IPv4 rule file or service not detected${NC}】"
-                            read -p "Do you want to create the configuration file? (y/n): " user_choice
+                            read -p "Do you want to create a new rules file? 【1】 Yes 【2】 No：" create_choice
                         fi
 
-                        if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
+                        if [[ "$create_choice" == "1" ]]; then
                             if [ "$LANGUAGE" = "CN" ]; then
-                                echo -e "【${RED}开始创建${NC}】"
+                                echo -e "【${RED}开始创建新的 IPv4 规则文件${NC}】"
                             else
-                                echo -e "【${RED}Starting creation${NC}】"
+                                echo -e "【${RED}Starting creation of new IPv4 rule file${NC}】"
                             fi
                             create_docker_rules
                         else
                             if [ "$LANGUAGE" = "CN" ]; then
-                                echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                                echo -e "【${YELLOW}已选择不创建新的规则文件${NC}】"
                             else
-                                echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                                echo -e "【${YELLOW}Chose not to create a new rules file${NC}】"
                             fi
                         fi
                     fi
@@ -1679,38 +1738,48 @@ manage_docker_firewall() {
                 2)
                     if [ -f "/root/add_ips.sh" ] && [ -f "/etc/systemd/system/add_ips.service" ]; then
                         if [ "$LANGUAGE" = "CN" ]; then
-                            echo -e "【${GREEN}已找到 IPv4 和 IPv6 规则文件并对其进行修改${NC}】"
+                            echo -e "【${GREEN}已找到 IPv4 和 IPv6 规则文件${NC}】"
+                            read -p "是否要修改现有规则文件？【1】 是 【2】 否：" modify_choice
                         else
-                            echo -e "【${GREEN}IPv4 and IPv6 rule file found and modifying it${NC}】"
+                            echo -e "【${GREEN}IPv4 and IPv6 rule file found${NC}】"
+                            read -p "Do you want to modify the existing rules file? 【1】 Yes 【2】 No：" modify_choice
                         fi
-                        modify_docker_ipv6_rules
+
+                        if [[ "$modify_choice" == "1" ]]; then
+                            modify_docker_ipv6_rules
+                        else
+                            if [ "$LANGUAGE" = "CN" ]; then
+                                echo -e "【${YELLOW}已选择不修改现有规则文件${NC}】"
+                            else
+                                echo -e "【${YELLOW}Chose not to modify the existing rules file${NC}】"
+                            fi
+                        fi
                     else
                         if [ "$LANGUAGE" = "CN" ]; then
                             echo -e "【${RED}未检测到 IPv4 和 IPv6 规则文件或服务${NC}】"
-                            read -p "是否创建配置文件？(y/n): " user_choice
+                            read -p "是否创建新的规则文件？【1】 是 【2】 否：" create_choice
                         else
                             echo -e "【${RED}IPv4 and IPv6 rule file or service not detected${NC}】"
-                            read -p "Do you want to create the configuration file? (y/n): " user_choice
+                            read -p "Do you want to create a new rules file? 【1】 Yes 【2】 No：" create_choice
                         fi
 
-                        if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
+                        if [[ "$create_choice" == "1" ]]; then
                             if [ "$LANGUAGE" = "CN" ]; then
-                                echo -e "【${RED}开始创建${NC}】"
+                                echo -e "【${RED}开始创建新的 IPv4 和 IPv6 规则文件${NC}】"
                             else
-                                echo -e "【${RED}Starting creation${NC}】"
+                                echo -e "【${RED}Starting creation of new IPv4 and IPv6 rule files${NC}】"
                             fi
                             create_docker_rules
                         else
                             if [ "$LANGUAGE" = "CN" ]; then
-                                echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                                echo -e "【${YELLOW}已选择不创建新的规则文件${NC}】"
                             else
-                                echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                                echo -e "【${YELLOW}Chose not to create a new rules file${NC}】"
                             fi
                         fi
                     fi
                     ;;
             esac
-
             ;;
         *)
             if [ "$LANGUAGE" = "CN" ]; then
