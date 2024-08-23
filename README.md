@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![Snipaste_2024-08-23_01-20-49](https://github.com/user-attachments/assets/27f5a08e-280e-4fbf-850d-9e89ae600e07)
+![Snipaste_2024-08-23_12-21-09](https://github.com/user-attachments/assets/51318df1-7b7d-4f98-b6de-7cc48b6e03ac)
 
 ---
 
@@ -33,8 +33,15 @@ English | [简体中文](./README.zh-cn.md)
 #### 【v1.6】 Sixth Edition，This script manages Docker firewall rules and supports services that allow either IPv4-only access or both IPv4 and IPv6 access. If the latter is the case, enabling Docker's custom network and configuring IPv6 forwarding and access is necessary. The script does not impose how users should configure these settings, but as of now, using the Docker project `robbertkl/ipv6nat` to achieve IPv6 forwarding and access within Docker networks is a recommended approach, although other methods can also be used.The management of Docker service firewall rules was the primary motivation for creating this script and is considered by the author as a highly necessary strategy for Docker maintenance. Two very important aspects are limiting external access to Docker services and enabling IPv6 access for Docker services. (2024.08.21 Noon)
 
 ---
+
 #### 【v1.7】 The seventh version corrects the logic error of Docker firewall management options, adds a judgment link to ask whether to create a configuration file, adds a submenu of common system commands, and adds an option to display Docker container information in the main menu to display the container name and the network where the container is located. Name, IPv4 address, IPv6 address, container running status, container port mapping information, optimize the readability of Docker container information display and the aesthetics of information output. (2024.08.22 Night)
+
 ---
+
+#### 【v1.8】 In the eighth version, the container status content displayed in the Docker container information is changed to white. After the Manhattan mobile client code automatically wraps, it is difficult to distinguish it from the container name on the dock. When the content obtained by changing the Docker container information is empty, It can represent the character N/A so that no information is obtained to avoid possible confusion in the information column. (2024.08.23 PM)
+
+---
+
 # Why was this script created?
 
 #### Noticed that many commands had to be entered manually each time, which was very inconvenient, so I integrated them into a script for easier maintenance and viewing.
