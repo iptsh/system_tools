@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v1.9"
+VERSION="v1.8"
 
 # Define color
 # 定义颜色
@@ -1076,15 +1076,12 @@ create_ssh_rules() {
         show_progress "【${BLUE}Creating${YELLOW} SSH ${BLUE}Firewall Rules${NC}】"
     fi
 
-    # Check if /root/add_ssh_ips.sh already exists
-    # 检查 /root/add_ssh_ips.sh 是否已经存在
-    if [ -f /root/add_ssh_ips.sh ]; then
-        if [ "$LANGUAGE" = "CN" ]; then
-            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}文件已存在，无需重复创建。】"
-        else
-            echo -e "【${RED}/root/add_ssh_ips.sh ${NC}file already exists, no need to recreate.】"
-        fi
-        return
+    # Display a message indicating the creation of the /root/add_ssh_ips.sh file and startup service
+    # 显示创建 /root/add_ssh_ips.sh 文件及开机自启动服务的提示信息
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${YELLOW}正在创建 ${GREEN}/root/add_ssh_ips.sh ${YELLOW}配置文件及开机自启动服务文件${NC}】"
+    else
+        echo -e "【${YELLOW}Creating ${GREEN}/root/add_ssh_ips.sh ${YELLOW}configuration file and startup service file${NC}】"
     fi
 	
     # Check and install ipset
@@ -1617,6 +1614,14 @@ check_docker_installed() {
             return 1
         fi
 
+        # Determine which configuration file to check
+        # 确定要检测的配置文件
+        if [[ "$network_choice" == "1" ]]; then
+            config_file="/root/add_ipv4_ips.sh"
+        else
+            config_file="/root/add_ips.sh"
+        fi
+
         if [ "$LANGUAGE" = "CN" ]; then
             echo -e "【${YELLOW}是否已经配置 Docker 防火墙规则${NC}】\n【${BLUE}1${NC}】 ${BLUE}是${NC}\n【${BLUE}2${NC}】 ${BLUE}否${NC}"
             read -p "【请输入选项】" docker_choice
@@ -1625,22 +1630,40 @@ check_docker_installed() {
             read -p "【Enter your choice】" docker_choice
         fi
 
-        if [[ $docker_choice == "1" ]]; then
+        if [[ "$docker_choice" == "1" ]]; then
             manage_docker_firewall
-        elif [[ $docker_choice == "2" ]]; then
-            if [ "$LANGUAGE" = "CN" ]; then
-                read -p "是否创建配置文件？(y/n): " user_choice
-            else
-                read -p "Do you want to create the configuration file? (y/n): " user_choice
-            fi
+        elif [[ "$docker_choice" == "2" ]]; then
+            # Check if the configuration file exists
+            # 检查配置文件是否存在
+            if [ -f "$config_file" ]; then
+                if [ "$LANGUAGE" = "CN" ]; then
+                    echo -e "【${YELLOW}检测到配置文件已存在${NC}】\n【${BLUE}1${NC}】 ${BLUE}管理配置文件${NC}\n【${BLUE}2${NC}】 ${BLUE}返回主菜单${NC}"
+                    read -p "【请输入选项】" modify_choice
+                else
+                    echo -e "【${YELLOW}Configuration file already exists${NC}】\n【${BLUE}1${NC}】 ${BLUE}Modify configuration file${NC}\n【${BLUE}2${NC}】 ${BLUE}Return to main menu${NC}"
+                    read -p "【Enter your choice】" modify_choice
+                fi
 
-            if [[ "$user_choice" == "y" || "$user_choice" == "Y" ]]; then
-                create_docker_rules
+                if [[ "$modify_choice" == "1" ]]; then
+                    manage_docker_firewall
+                else
+                    return 0
+                fi
             else
                 if [ "$LANGUAGE" = "CN" ]; then
-                    echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                    read -p "配置文件不存在，是否创建配置文件？(y/n): " create_choice
                 else
-                    echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                    read -p "Configuration file does not exist. Do you want to create it? (y/n): " create_choice
+                fi
+
+                if [[ "$create_choice" == "y" || "$create_choice" == "Y" ]]; then
+                    create_docker_rules
+                else
+                    if [ "$LANGUAGE" = "CN" ]; then
+                        echo -e "【${YELLOW}已选择不创建配置文件${NC}】"
+                    else
+                        echo -e "【${YELLOW}Chose not to create the configuration file${NC}】"
+                    fi
                 fi
             fi
         else
@@ -1920,15 +1943,12 @@ create_docker_rules() {
 # Create an IPv4-only Docker firewall rule
 # 创建仅支持 IPv4 的 Docker 防火墙规则
 create_ipv4_only_rules() {
-    # Check if /root/add_ipv4_ips.sh already exists
-    # 检查 /root/add_ipv4_ips.sh 是否已经存在
-    if [ -f /root/add_ipv4_ips.sh ]; then
-        if [ "$LANGUAGE" = "CN" ]; then
-            echo -e "【${RED}/root/add_ipv4_ips.sh ${NC}文件已存在，无需重复创建。】"
-        else
-            echo -e "【${RED}/root/add_ipv4_ips.sh ${NC}file already exists, no need to recreate.】"
-        fi
-        return
+    # Display a message indicating the creation of the /root/add_ipv4_ips.sh file and startup service
+    # 显示创建 /root/add_ipv4_ips.sh 文件及开机自启动服务的提示信息
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${YELLOW}正在创建 ${GREEN}/root/add_ipv4_ips.sh ${YELLOW}配置文件及开机自启动服务文件${NC}】"
+    else
+        echo -e "【${YELLOW}Creating ${GREEN}/root/add_ipv4_ips.sh ${YELLOW}configuration file and startup service file${NC}】"
     fi
 
     # Check and install ipset
@@ -2089,15 +2109,12 @@ EOF
 # Create Docker firewall rules that support IPv4 and IPv6
 # 创建支持 IPv4 和 IPv6 的 Docker 防火墙规则
 create_dual_stack_rules() {
-    # Check if /root/add_ips.sh already exists
-    # 检查 /root/add_ips.sh 是否已经存在
-    if [ -f /root/add_ips.sh ]; then
-        if [ "$LANGUAGE" = "CN" ]; then
-            echo -e "【${RED}/root/add_ips.sh ${NC}文件已存在，无需重复创建。】"
-        else
-            echo -e "【${RED}/root/add_ips.sh ${NC}file already exists, no need to recreate.】"
-        fi
-        return
+    # Display a message indicating the creation of the /root/add_ips.sh file and startup service
+    # 显示创建 /root/add_ips.sh 文件及开机自启动服务的提示信息
+    if [ "$LANGUAGE" = "CN" ]; then
+        echo -e "【${YELLOW}正在创建 ${GREEN}/root/add_ips.sh ${YELLOW}配置文件及开机自启动服务文件${NC}】"
+    else
+        echo -e "【${YELLOW}Creating ${GREEN}/root/add_ips.sh ${YELLOW}configuration file and startup service file${NC}】"
     fi
 
     # Check and install ipset
