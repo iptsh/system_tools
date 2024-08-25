@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![Snipaste_2024-08-23_12-24-33](https://github.com/user-attachments/assets/2068cda3-6500-43d0-9545-4bffbc788cff)
+![Snipaste_2024-08-25_22-47-07](https://github.com/user-attachments/assets/19c25c82-4868-4f16-a9a2-4caf090079ab)
 
 ---
 
@@ -39,6 +39,10 @@ English | [简体中文](./README.zh-cn.md)
 ---
 
 #### 【v1.8】 Eighth Edition, Changed the container status in Docker container information display to white, in order to avoid visual confusion with container names when the code automatically wraps on mobile clients.Modified the script so that when Docker container information is not retrieved, it displays the character "N/A" to represent missing information, preventing potential misalignment of information columns. (2024.08.23 PM)(2024.08.23 PM)
+
+---
+
+#### 【v1.9】 Ninth Version, This version fixes the issue where the script did not check if ipset was already installed before creating Docker firewall configuration files. It optimizes and changes the terminal interaction logic when managing SSH firewall rules and Docker firewall rules.When a user chooses not to create a configuration file, the script will first check if the configuration file already exists in the system. This approach introduces a validation logic to prevent mistakenly proceeding directly to the file creation step, which may not be the best user experience. Similarly, when the user chooses to modify an existing configuration file, the script will also first check if the corresponding configuration file already exists in the system, applying the same validation logic.In previous versions, the script only checked if the configuration file existed right before actually creating it. Now, this check has been moved up to the interaction inquiry phase. This change ensures that before any configuration file is created, the system confirms the absence of the corresponding configuration file, avoiding any blind file creation. All actions are carried out under a transparent logical environment for the script's sensitive operations. The previous detection step is now converted into corresponding prompt messages.(2024.08.25 Night)
 
 ---
 
