@@ -1,12 +1,12 @@
 # Script Introduction
 
-English | [简体中文](./README.zh-cn.md)
+【English】 | 【[简体中文](./README.zh-cn.md)】
 
 ![Snipaste_2024-08-25_22-47-07](https://github.com/user-attachments/assets/19c25c82-4868-4f16-a9a2-4caf090079ab)
 
 ---
 
-[Change log](./Change_log)
+【[Change log](./Change_log)】
 
 ---
 
