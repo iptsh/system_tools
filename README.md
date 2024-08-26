@@ -1,10 +1,8 @@
-# 【Script Introduction】
-#### 【English】 | 【[简体中文](./README.zh-cn.md)】
+# 【Script Introduction】【English】 | 【[简体中文](./README.zh-cn.md)】
 
 ![Snipaste_2024-08-25_22-47-07](https://github.com/user-attachments/assets/19c25c82-4868-4f16-a9a2-4caf090079ab)
 
-# 【Detailed Update Log for the Script】
-#### 【[Change log](./Change_log)】
+# 【Detailed Update Log for the Script】【[Change log](./Change_log)】
 # 【Installation & Usage】
 ```bash
 curl -O https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && \
