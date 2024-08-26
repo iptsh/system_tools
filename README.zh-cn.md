@@ -2,7 +2,7 @@
 
 ![Snipaste_2024-08-25_22-47-19](https://github.com/user-attachments/assets/609158bf-2ac6-4117-a906-2447dc943629)
 
-### 【脚本详细更新记录】【[更新日志](./Change_log_zh-cn)】
+### 【脚本详细更新记录】【[更新日志](./Change_log_zh-cn.md)】
 ### 【安装使用方法】
 ```bash
 curl -O https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && \
