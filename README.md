@@ -19,6 +19,4 @@ chmod +x system_tools.sh && \
 ./system_tools.sh
 ```
 # 【Why was this script created】
-#### Noticed that many commands had to be entered manually each time, which was very inconvenient, so I integrated them into a script for easier maintenance and viewing.
-#### This is a very simplified system tool collection, currently in its initial version, convenient for personal use.
-#### All features come from ChatGPT training results, with more common functions gradually added, environment for Debian 12 system.
+#### Noticed that many commands had to be entered manually each time, which was very inconvenient, so I integrated them into a script for easier maintenance and viewing.This is a very simplified system tool collection, currently in its initial version, convenient for personal use.All features come from ChatGPT training results, with more common functions gradually added, environment for Debian 12 system.
