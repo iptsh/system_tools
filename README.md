@@ -6,7 +6,7 @@ English | [简体中文](./README.zh-cn.md)
 
 ---
 
-### 【Changelog】[Change log](./Change_log)
+[Change log](./Change_log)
 
 ---
 
