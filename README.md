@@ -1,7 +1,6 @@
 ### 【Script Introduction】【English】【[简体中文](./README.zh-cn.md)】
 
-![dsfgdsfgd](https://github.com/user-attachments/assets/dfb9b005-dc3a-4c0d-b0a2-39351ea8b007)
-
+![4564565435](https://github.com/user-attachments/assets/47c48cfb-12cb-4080-8ebb-e951e687fc17)
 
 ### 【Detailed Update Log for the Script】【[Change log](./Change_log.md)】
 ### 【Installation & Usage】
