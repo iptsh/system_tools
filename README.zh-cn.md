@@ -1,6 +1,7 @@
 ### 【脚本介绍】【简体中文】【[English](./README.md)】
 
-![Snipaste_2024-08-25_22-47-19](https://github.com/user-attachments/assets/609158bf-2ac6-4117-a906-2447dc943629)
+![dsfgdsfgd](https://github.com/user-attachments/assets/88a0eea4-f782-4b88-aaa3-0791d6947153)
+
 
 ### 【脚本详细更新记录】【[更新日志](./Change_log_zh-cn.md)】
 ### 【安装使用方法】
