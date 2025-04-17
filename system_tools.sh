@@ -2367,7 +2367,12 @@ while true; do
             else
                 show_progress "【${BLUE}View${YELLOW} IPv4 Docker NAT ${BLUE}Rules${NC}】"
             fi
-            iptables -t nat -L POSTROUTING -n --line-numbers | output_command
+            {
+                echo -e "\n===== POSTROUTING 链 ====="
+                iptables -t nat -L POSTROUTING -n --line-numbers
+                echo -e "\n===== DOCKER 链 ====="
+                iptables -t nat -L DOCKER -n --line-numbers
+            } | output_command
             ;;
         07)
             if [ "$LANGUAGE" = "CN" ]; then
@@ -2375,7 +2380,12 @@ while true; do
             else
                 show_progress "【${BLUE}View${YELLOW} IPv6 Docker NAT ${BLUE}Rules${NC}】"
             fi
-            ip6tables -t nat -L POSTROUTING -n --line-numbers | output_command
+            {
+                echo -e "\n===== POSTROUTING 链 ====="
+                ip6tables -t nat -L POSTROUTING -n --line-numbers
+                echo -e "\n===== DOCKER 链 ====="
+                ip6tables -t nat -L DOCKER -n --line-numbers
+            } | output_command
             ;;
         08)
             manage_screen
