@@ -44,6 +44,6 @@
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-【v2.1】 Version 11, In the new version, both the Nezha monitoring server and the monitored client share the same port. This script updates the method for matching IP address firewall rules while retaining compatibility with both the new and old port matching methods. (2025.04.18 PM)
+【v2.1】 Eleventh Edition, In the new version, both the Nezha monitoring server and the monitored client share the same port. This script updates the method for matching IP address firewall rules while retaining compatibility with both the new and old port matching methods. (2025.04.18 PM)
 
 -----------------------------------------------------------------------------------------------------------------------------
