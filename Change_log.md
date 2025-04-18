@@ -43,3 +43,7 @@
 【v2.0】 Tenth Edition, In the latest version of Debian, it is no longer possible to view detailed port NAT forwarding information through POSTROUTING when checking iptables IPv4 Docker NAT rules and ip6tables IPv6 Docker NAT rules. This version adds DOCKER details to display the forwarding information. (2025.04.17 Noon)
 
 -----------------------------------------------------------------------------------------------------------------------------
+
+【v2.1】 Version 11, In the new version, both the Nezha monitoring server and the monitored client share the same port. This script updates the method for matching IP address firewall rules while retaining compatibility with both the new and old port matching methods. (2025.04.18 PM)
+
+-----------------------------------------------------------------------------------------------------------------------------
