@@ -1127,15 +1127,30 @@ create_ssh_rules() {
     fi
 
     # Create the add_ssh_ips.sh script
-    # 创建 add_ssh_ips.sh 脚本
-    cat <<EOF > /root/add_ssh_ips.sh
+# 创建 add_ssh_ips.sh 脚本
+cat <<"EOF" > /root/add_ssh_ips.sh
 #!/bin/bash
 
-ipset create allowed_ssh_ips hash:ip
-ipset create allowed_ssh_ipv6_ips hash:ip family inet6
+PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
+[ -z "$PORT" ] && PORT=22
+dport=$PORT
 
-$(for ip in $ipv4_addresses; do echo "ipset add allowed_ssh_ips $ip"; done)
-$(for ip in $ipv6_addresses; do echo "ipset add allowed_ssh_ipv6_ips $ip"; done)
+ipset create allowed_ssh_ips hash:ip 2>/dev/null
+ipset create allowed_ssh_ipv6_ips hash:ip family inet6 2>/dev/null
+
+# 添加 IPv4 地址
+EOF
+
+for ip in $ipv4_addresses; do
+    echo "ipset add allowed_ssh_ips $ip 2>/dev/null" >> /root/add_ssh_ips.sh
+done
+
+# 添加 IPv6 地址
+for ip in $ipv6_addresses; do
+    echo "ipset add allowed_ssh_ipv6_ips $ip 2>/dev/null" >> /root/add_ssh_ips.sh
+done
+
+cat <<'EOF' >> /root/add_ssh_ips.sh
 
 COMMENT_ESCAPED="Svc:SSH"
 
@@ -1145,7 +1160,7 @@ while iptables -D INPUT -p tcp --dport $dport -m comment --comment $COMMENT_ESCA
 
 # 设置新的 IPv4 规则
 iptables -I INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ips src -j ACCEPT
-iptables -A INPUT -p tcp --dport $dport -m comment --comment "\${COMMENT_ESCAPED}" -j DROP
+iptables -A INPUT -p tcp --dport $dport -m comment --comment "$COMMENT_ESCAPED" -j DROP
 
 # 删除重复的 IPv6 规则
 while ip6tables -D INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ipv6_ips src -j ACCEPT &> /dev/null; do :; done
@@ -1153,7 +1168,7 @@ while ip6tables -D INPUT -p tcp --dport $dport -m comment --comment $COMMENT_ESC
 
 # 设置新的 IPv6 规则
 ip6tables -I INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ipv6_ips src -j ACCEPT
-ip6tables -A INPUT -p tcp --dport $dport -m comment --comment "\${COMMENT_ESCAPED}" -j DROP
+ip6tables -A INPUT -p tcp --dport $dport -m comment --comment "$COMMENT_ESCAPED" -j DROP
 EOF
 
     # Ensure the script is executable
