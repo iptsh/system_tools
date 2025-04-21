@@ -1139,11 +1139,21 @@ $(for ip in $ipv6_addresses; do echo "ipset add allowed_ssh_ipv6_ips $ip"; done)
 
 COMMENT_ESCAPED="Svc:SSH"
 
-while iptables -D INPUT -p tcp -m multiport --dports $PORT -m set --match-set allowed_ssh_ips src -j ACCEPT 2>/dev/null; do :; done
-iptables -A INPUT -p tcp -m multiport --dports $PORT -m set --match-set allowed_ssh_ips src -m comment --comment "\${COMMENT_ESCAPED}" -j ACCEPT
+# 删除重复的 IPv4 规则
+while iptables -D INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ips src -j ACCEPT &> /dev/null; do :; done
+while iptables -D INPUT -p tcp --dport $dport -m comment --comment $COMMENT_ESCAPED -j DROP &> /dev/null; do :; done
 
-while ip6tables -D INPUT -p tcp -m multiport --dports $PORT -m set --match-set allowed_ssh_ipv6_ips src -j ACCEPT 2>/dev/null; do :; done
-ip6tables -A INPUT -p tcp -m multiport --dports $PORT -m set --match-set allowed_ssh_ipv6_ips src -m comment --comment "\${COMMENT_ESCAPED}" -j ACCEPT
+# 设置新的 IPv4 规则
+iptables -I INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ips src -j ACCEPT
+iptables -A INPUT -p tcp --dport $dport -m comment --comment "\${COMMENT_ESCAPED}" -j DROP
+
+# 删除重复的 IPv6 规则
+while ip6tables -D INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ipv6_ips src -j ACCEPT &> /dev/null; do :; done
+while ip6tables -D INPUT -p tcp --dport $dport -m comment --comment $COMMENT_ESCAPED -j DROP &> /dev/null; do :; done
+
+# 设置新的 IPv6 规则
+ip6tables -I INPUT -p tcp -m multiport --dports $dport -m set --match-set allowed_ssh_ipv6_ips src -j ACCEPT
+ip6tables -A INPUT -p tcp --dport $dport -m comment --comment "\${COMMENT_ESCAPED}" -j DROP
 EOF
 
     # Ensure the script is executable
