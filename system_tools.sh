@@ -768,10 +768,10 @@ handle_rule_deletion() {
                 while true; do
                     if [ "$LANGUAGE" = "CN" ]; then
                         echo -e "【${BLUE}删除所有规则${NC}】"
-                        read -p "【${YELLOW}确定要删除所有规则吗？输入${RED} Y/N ${YELLOW}或${RED} 'q' ${YELLOW}返回主菜单${NC}】" confirm
+                        read -p "【确定要删除所有规则吗？输入 Y/N 或 'q' 返回主菜单】" confirm
                     else
                         echo -e "【${BLUE}Delete all rules${NC}】"
-                        read -p "【${YELLOW}Are you sure you want to delete all rules? Enter ${RED} Y/N ${YELLOW} or ${RED} 'q' ${YELLOW} to return to main menu${NC}】" confirm
+                        read -p "【Are you sure you want to delete all rules? Enter  Y/N  or  'q'  to return to main menu】" confirm
                     fi
                     if [[ "$confirm" =~ ^[ynq]$ ]]; then
                         break  # Exit loop, continue processing option
