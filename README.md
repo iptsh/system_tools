@@ -1,6 +1,6 @@
 ### 【Script Introduction】【English】【[简体中文](./README.zh-cn.md)】
 
-![Quicker_20250418_1248144441](https://github.com/user-attachments/assets/26c57694-2975-4c3f-995e-f5df256a99fb)
+![Quicker_20250421_133945](https://github.com/user-attachments/assets/988377fe-ebfa-41bc-9e14-7790db34da60)
 
 ### 【Detailed Update Log for the Script】【[Change log](./Change_log.md)】
 ### 【Installation & Usage】
