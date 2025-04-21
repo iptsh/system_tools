@@ -390,10 +390,10 @@ manage_screen() {
     if ! command -v screen &> /dev/null; then
         if [ "$LANGUAGE" = "CN" ]; then
             echo -e "【${RED}screen 工具未安装${NC}】"
-            read -p "【${YELLOW}是否立即安装 screen 工具？（y/n）${NC}】" install_choice
+            read -p "【是否立即安装 screen 工具？（y/n）】" install_choice
         else
             echo -e "【${RED}Screen tool is not installed${NC}】"
-            read -p "【${YELLOW}Do you want to install the screen tool now? (y/n)${NC}】" install_choice
+            read -p "【Do you want to install the screen tool now? (y/n)】" install_choice
         fi
         if [[ "$install_choice" == "y" || "$install_choice" == "Y" ]]; then
             sudo apt-get update && sudo apt-get install -y screen
