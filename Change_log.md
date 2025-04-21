@@ -47,3 +47,7 @@
 【v2.1】 Eleventh Edition, In the new version, both the Nezha monitoring server and the monitored client share the same port. This script updates the method for matching IP address firewall rules while retaining compatibility with both the new and old port matching methods. (2025.04.18 PM)
 
 -----------------------------------------------------------------------------------------------------------------------------
+
+【v2.2】 Twelfth Edition, Corrected the error in the script for creating new SSH firewall rules. The original script did not define a drop rule, which constitutes a critical functional flaw. Defining only allow rules without a corresponding drop rule renders the configuration meaningless. (2025.04.21 PM)
+
+-----------------------------------------------------------------------------------------------------------------------------
