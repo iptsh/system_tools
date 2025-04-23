@@ -1261,8 +1261,6 @@ modify_existing_rules() {
         else
             echo -e "【${YELLOW}SSH ${GREEN}Firewall rules have been modified and successfully reapplied${NC}】"
         fi
-        show_ipset   # Display IPSET addresses
-        # 显示 IPSET 地址
 
     else
         if [ "$LANGUAGE" = "CN" ]; then
