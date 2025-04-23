@@ -1197,13 +1197,10 @@ EOF
     systemctl start add_ssh_ips.service
 
     if [ "$LANGUAGE" = "CN" ]; then
-        echo -e "【${GREEN}当前${YELLOW} SSH ${NC}防火墙规则已被创建并成功启用${NC}】"
+        echo -e "【${GREEN}当前${YELLOW} SSH ${GREEN}防火墙规则已被创建并成功启用${NC}】"
     else
-        echo -e "【${GREEN}SSH ${YELLOW}Firewall rules have been successfully created and activated${NC}】"
+        echo -e "【${YELLOW}SSH ${GREEN}Firewall rules have been successfully created and activated${NC}】"
     fi
-
-    show_ipset   # Display IPSET addresses
-    # 显示 IPSET 地址
 }
 
 # Modify existing SSH firewall rules
@@ -1262,7 +1259,7 @@ modify_existing_rules() {
         if [ "$LANGUAGE" = "CN" ]; then
             echo -e "【${GREEN}当前${YELLOW} SSH ${GREEN}防火墙规则已被修改并成功重新应用${NC}】"
         else
-            echo -e "【${GREEN}SSH ${YELLOW}Firewall rules have been modified and successfully reapplied${NC}】"
+            echo -e "【${YELLOW}SSH ${GREEN}Firewall rules have been modified and successfully reapplied${NC}】"
         fi
         show_ipset   # Display IPSET addresses
         # 显示 IPSET 地址
