@@ -51,6 +51,6 @@
 【v2.2】 Twelfth Edition, Corrected the error in the script for creating new SSH firewall rules. The original script did not define a drop rule, which constitutes a critical functional flaw. Defining only allow rules without a corresponding drop rule renders the configuration meaningless. (2025.04.21 PM)
 
 -----------------------------------------------------------------------------------------------------------------------------
-【v2.3】 Thirteenth Edition, remove the code that displays the IP address set after initially creating the SSH rule, as it cannot be displayed and is therefore invalid code. (2025.04.23 PM)
+【v2.3】 Thirteenth Edition, Removed the code for displaying the IP address set after the initial creation and modification of the SSH rule due to display failure, rendering it invalid. (2025.04.23 PM)
 
 -----------------------------------------------------------------------------------------------------------------------------
