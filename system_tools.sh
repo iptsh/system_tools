@@ -2120,10 +2120,7 @@ EOF
     else
         echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled${NC}】【${YELLOW}Please ensure to modify the key information in the /root/add_ipv4_ips.sh file as needed${NC}】"
     fi
-	
-    # Display IPSET addresses
-    # 显示 IPSET 地址
-    show_docker_ipv4_ipset
+
 }
 
 # Create Docker firewall rules that support IPv4 and IPv6
@@ -2339,10 +2336,7 @@ EOF
     else
         echo -e "【${GREEN}Docker firewall rules have been successfully created and enabled${NC}】【${YELLOW}Please ensure to modify the key information in the /root/add_ips.sh file as needed${NC}】"
     fi
-	
-    # Display IPSET addresses
-    # 显示 IPSET 地址	
-    show_docker_ipv4_ipv6_ipset
+
 }
 
 # Main menu cycle
