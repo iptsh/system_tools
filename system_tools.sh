@@ -2166,14 +2166,14 @@ NETWORK_NAME="my-net-ipv6"
 # 获取容器的 IPv4 地址
 get_container_ip() {
     local container_name=\$1
-    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].IPAddress'
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks[\"$NETWORK_NAME\"].IPAddress'
 }
 
 # Get the IPv6 address of the container
 # 获取容器的 IPv6 地址
 get_container_ipv6() {
     local container_name=\$1
-    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].GlobalIPv6Address'
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks[\"$NETWORK_NAME\"].GlobalIPv6Address'
 }
 
 # Get the host port mapped to the container
