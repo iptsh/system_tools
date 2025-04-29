@@ -2249,7 +2249,7 @@ for key in "\${!CONTAINERS[@]}"; do
         ip6tables -I DOCKER-USER 1 \$DROP_RULE_IPV6
 
     else
-        if { [[ "$container_name" == "dashboard-dashboard-1" && "$container_port" == "5555" ]] || [[ "$container_name" == "nezha-dashboard" && "$container_port" == "8008" ]]; }; then
+        if { [[ "\$container_name" == "dashboard-dashboard-1" && "\$container_port" == "5555" ]] || [[ "\$container_name" == "nezha-dashboard" && "$\container_port" == "8008" ]]; }; then
             # Define Nezha rules
             # 定义 Nezha 规则
             ACCEPT_RULE_IPV4="-m set --match-set allowed_nezha_ips src -d \$CONTAINER_IP -p tcp --dport \$container_port -m comment --comment \$COMMENT -j ACCEPT"
