@@ -2100,13 +2100,11 @@ EOF
     # 创建 systemd 服务以在启动时运行脚本
     cat <<EOF > /etc/systemd/system/add_ipv4_ips.service
 [Unit]
-Description=Add IP addresses to ipset for Docker containers
-After=docker.service
-
+Description=Add IP addresses to ipset and set iptables rules
+After=network.target
 [Service]
+Type=oneshot
 ExecStart=/root/add_ipv4_ips.sh
-Restart=always
-
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -2156,24 +2154,21 @@ create_dual_stack_rules() {
     cat <<EOF > /root/add_ips.sh
 #!/bin/bash
 
-# Tip: Modify your network name here
-# 提示：请在这里修改您的网络名称
 # Change "my-net-ipv6" to your actual Docker network name
 # 请将 "my-net-ipv6" 修改为您实际的 Docker 网络名称
-NETWORK_NAME="my-net-ipv6"
 
 # Get the IPv4 address of the container
 # 获取容器的 IPv4 地址
 get_container_ip() {
     local container_name=\$1
-    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].IPAddress'
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["my-net-ipv6"].IPAddress'
 }
 
 # Get the IPv6 address of the container
 # 获取容器的 IPv6 地址
 get_container_ipv6() {
     local container_name=\$1
-    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["\$NETWORK_NAME"].GlobalIPv6Address'
+    docker inspect \$container_name | jq -r '.[0].NetworkSettings.Networks["my-net-ipv6"].GlobalIPv6Address'
 }
 
 # Get the host port mapped to the container
@@ -2316,13 +2311,11 @@ EOF
     # 创建 systemd 服务以在启动时运行脚本
     cat <<EOF > /etc/systemd/system/add_ips.service
 [Unit]
-Description=Add IP addresses to ipset for Docker containers
-After=docker.service
-
+Description=Add IP addresses to ipset and set iptables rules
+After=network.target
 [Service]
+Type=oneshot
 ExecStart=/root/add_ips.sh
-Restart=always
-
 [Install]
 WantedBy=multi-user.target
 EOF
