@@ -1131,7 +1131,7 @@ create_ssh_rules() {
 cat <<"EOF" > /root/add_ssh_ips.sh
 #!/bin/bash
 
-PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
+PORT=$(sshd -T 2>/dev/null | grep -i "^port " | awk '{print $2}')
 [ -z "$PORT" ] && PORT=22
 dport=$PORT
 
