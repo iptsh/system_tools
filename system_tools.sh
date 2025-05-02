@@ -1106,9 +1106,9 @@ create_ssh_rules() {
     PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
     if [ -z "$PORT" ]; then
         if [ "$LANGUAGE" = "CN" ]; then
-            read -p "【尝试自动检测${YELLOW} SSH ${NC}端口号已失败】【需要手动输入】" PORT
+            read -p "【尝试自动检测 SSH 端口号已失败】【需要手动输入】" PORT
         else
-            read -p "【Failed to auto-detect${YELLOW} SSH ${NC}port】【Please enter manually】" PORT
+            read -p "【Failed to auto-detect SSH port】【Please enter manually】" PORT
         fi
     fi
 
