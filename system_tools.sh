@@ -1102,8 +1102,8 @@ create_ssh_rules() {
     fi
 
     # Get SSH port number
-    # 获取 SSH 端口号
-    PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
+# 获取 SSH 端口号（支持 /etc/ssh/sshd_config.d/*.conf）
+PORT=$(grep -hE "^\s*Port\s+[0-9]+" /etc/ssh/sshd_config /etc/ssh/sshd_config.d/*.conf 2>/dev/null | awk '{print $2}' | tail -n1)
     if [ -z "$PORT" ]; then
         if [ "$LANGUAGE" = "CN" ]; then
             read -p "【尝试自动检测 SSH 端口号已失败】【需要手动输入】" PORT
@@ -1128,12 +1128,12 @@ create_ssh_rules() {
 
     # Create the add_ssh_ips.sh script
 # 创建 add_ssh_ips.sh 脚本
-cat <<"EOF" > /root/add_ssh_ips.sh
+cat <<EOF > /root/add_ssh_ips.sh
 #!/bin/bash
 
-PORT=$(sshd -T 2>/dev/null | grep -i "^port " | awk '{print $2}')
-[ -z "$PORT" ] && PORT=22
-dport=$PORT
+PORT=$PORT
+[ -z "\$PORT" ] && PORT=22
+dport=\$PORT
 
 ipset create allowed_ssh_ips hash:ip 2>/dev/null
 ipset create allowed_ssh_ipv6_ips hash:ip family inet6 2>/dev/null
