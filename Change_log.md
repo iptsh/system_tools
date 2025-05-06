@@ -54,3 +54,7 @@
 【v2.3】 Thirteenth Edition, Removed the code for displaying the IP address set after the initial creation and modification of the SSH rule due to display failure, rendering it invalid. (2025.04.23 PM)
 
 -----------------------------------------------------------------------------------------------------------------------------
+【v2.3】 Thirteenth Edition, Removed the code for displaying the IP address set after the initial creation and modification of the SSH rule due to display failure, rendering it invalid. (2025.04.23 PM)
+
+-----------------------------------------------------------------------------------------------------------------------------
+【v2.4】 Fourteenth Edition, fixed three critical errors when creating new ssh and docker ip scripts, including errors in network name retrieval, container name retrieval, and the ipset address set service. The script author has migrated to the new iptsh.com website. Fixed issues with invalid display colors in several details. (2025.05.06 PM)
