@@ -5,13 +5,13 @@
 ### 【Detailed Update Log for the Script】【[Change log](./Change_log.md)】
 ### 【Installation & Usage】
 ```bash
-curl -O https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && \
+curl -O https://raw.githubusercontent.com/iptsh/system_tools/main/system_tools.sh && \
 chmod +x ./system_tools.sh && \
 ./system_tools.sh
 ```
 #### 【OR】
 ```bash
-wget "https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh?$(date +%s)" \
+wget "https://raw.githubusercontent.com/iptsh/system_tools/main/system_tools.sh?$(date +%s)" \
 -O system_tools.sh && \
 chmod +x system_tools.sh && \
 ./system_tools.sh
