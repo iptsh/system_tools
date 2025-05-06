@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v2.6"
+VERSION="v2.4"
 
 # Define color
 # 定义颜色
