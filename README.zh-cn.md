@@ -1,6 +1,6 @@
 ### 【脚本介绍】【简体中文】【[English](./README.md)】
 
-![Quicker_20250423_121916](https://github.com/user-attachments/assets/db004031-13bb-486a-8a94-c66b1dc960b0)
+![Quicker_20250506_115428](https://github.com/user-attachments/assets/8c44959a-b637-4477-9ef4-9984ef865ae5)
 
 ### 【脚本详细更新记录】【[更新日志](./Change_log_zh-cn.md)】
 ### 【安装使用方法】
