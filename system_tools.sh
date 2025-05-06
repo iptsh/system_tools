@@ -2,7 +2,7 @@
 
 # Define version number
 # 定义版本号
-VERSION="v2.5"
+VERSION="v2.6"
 
 # Define color
 # 定义颜色
@@ -74,7 +74,7 @@ show_menu() {
     if [ "$LANGUAGE" = "CN" ]; then
         echo -e "【${RED}系统工具合集${NC}】【${YELLOW}${VERSION}${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${WHITE}作者网站】【${YELLOW} https://scarsong.com ${NC}】"
+        echo -e "【${WHITE}作者网站】【${YELLOW} https://iptsh.com ${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${YELLOW}捷径${NC}】【${WHITE}通过快捷键 ${YELLOW}s${WHITE} 可快速启动脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -99,7 +99,7 @@ show_menu() {
     else
         echo -e "【${RED}System Tools Collection${NC}】【${YELLOW}${VERSION}${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${WHITE}Author Website】【${YELLOW} https://scarsong.com ${NC}】"
+        echo -e "【${WHITE}Author Website】【${YELLOW} https://iptsh.com ${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${YELLOW}Shortcut${NC}】【${WHITE}Use the shortcut key ${YELLOW}s${WHITE} to quickly start the script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
