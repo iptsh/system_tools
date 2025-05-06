@@ -5,13 +5,13 @@
 ### 【脚本详细更新记录】【[更新日志](./Change_log_zh-cn.md)】
 ### 【安装使用方法】
 ```bash
-curl -O https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh && \
+curl -O https://raw.githubusercontent.com/iptsh/system_tools/main/system_tools.sh && \
 chmod +x ./system_tools.sh && \
 ./system_tools.sh
 ```
 #### 【或者】
 ```bash
-wget "https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh?$(date +%s)" \
+wget "https://raw.githubusercontent.com/iptsh/system_tools/main/system_tools.sh?$(date +%s)" \
 -O system_tools.sh && \
 chmod +x system_tools.sh && \
 ./system_tools.sh
