@@ -17,9 +17,9 @@ NC='\033[0m'           # No Color 取消颜色
 # 需要被快捷键执行的脚本路径
 SCRIPT_PATH="/usr/local/bin/s"
 SOURCE_SCRIPT="/root/system_tools.sh"
-REMOTE_SCRIPT_URL="https://raw.githubusercontent.com/scarsong/system_tools/main/system_tools.sh"
-CHANGE_LOG_URL="https://raw.githubusercontent.com/scarsong/system_tools/main/Change_log.md"
-CHANGE_LOG_ZH_CN_URL="https://raw.githubusercontent.com/scarsong/system_tools/main/Change_log_zh-cn.md"
+REMOTE_SCRIPT_URL="https://raw.githubusercontent.com/iptsh/system_tools/main/system_tools.sh"
+CHANGE_LOG_URL="https://raw.githubusercontent.com/iptsh/system_tools/main/Change_log.md"
+CHANGE_LOG_ZH_CN_URL="https://raw.githubusercontent.com/iptsh/system_tools/main/Change_log_zh-cn.md"
 
 # Check if the shortcut file 's' exists and if its content matches the expected script path
 # 判断是否存在快捷文件s，并检查内容是否一致
