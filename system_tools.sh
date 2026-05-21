@@ -95,7 +95,7 @@ show_menu() {
         echo -e "【${BLUE}20${NC}】【${WHITE}更新日志${NC}】"
 		echo -e "【${BLUE}99${NC}】【${RED}卸载脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}00${NC}】【${RED}退出脚本${NC}】"
+        echo -e "【${BLUE}00${NC}】【${YELLOW}退出脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
     else
         echo -e "【${RED}System Tools Collection${NC}】【${YELLOW}${VERSION}${NC}】"
@@ -121,7 +121,7 @@ show_menu() {
         echo -e "【${BLUE}20${NC}】【${WHITE}Change log${NC}】"
 		echo -e "【${BLUE}99${NC}】【${RED}Uninstall script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
-        echo -e "【${BLUE}00${NC}】【${RED}Exit script${NC}】"
+        echo -e "【${BLUE}00${NC}】【${YELLOW}Exit script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
     fi
 }
