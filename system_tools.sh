@@ -396,7 +396,7 @@ manage_screen() {
             read -p "【Do you want to install the screen tool now? (y/n)】" install_choice
         fi
         if [[ "$install_choice" == "y" || "$install_choice" == "Y" ]]; then
-            sudo apt-get update && sudo apt-get install -y screen
+            apt-get update && apt-get install -y screen
             if [ "$LANGUAGE" = "CN" ]; then
                 echo -e "【${GREEN}screen 工具已成功安装${NC}】"
             else
