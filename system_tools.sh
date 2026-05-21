@@ -93,6 +93,7 @@ show_menu() {
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}19${NC}】【${GREEN}脚本更新${NC}】"
         echo -e "【${BLUE}20${NC}】【${WHITE}更新日志${NC}】"
+		echo -e "【${BLUE}99${NC}】【${RED}卸载脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}00${NC}】【${RED}退出脚本${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -118,6 +119,7 @@ show_menu() {
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}19${NC}】【${GREEN}Update script${NC}】"
         echo -e "【${BLUE}20${NC}】【${WHITE}Change log${NC}】"
+		echo -e "【${BLUE}99${NC}】【${RED}Uninstall script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
         echo -e "【${BLUE}00${NC}】【${RED}Exit script${NC}】"
         echo -e "${BLUE}================================================================================${NC}"
@@ -2454,6 +2456,33 @@ while true; do
         20)
             view_change_log
             ;;
+		99)
+            if [ "$LANGUAGE" = "CN" ]; then
+                echo -e "${RED}警告：此操作将删除脚本文件 /root/system_tools.sh${NC}"
+                echo -ne "【${RED}是否确认卸载脚本？${NC}】【${GREEN}y${NC}/${RED}n${NC}】："
+                read -r confirm
+                if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+                    rm -f /root/system_tools.sh
+                    sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
+                    echo -e "【${GREEN}脚本已成功卸载。${NC}】"
+                    exit 0
+                else
+                    echo -e "【${YELLOW}已取消卸载。${NC}】"
+                fi
+            else
+                echo -e "${RED}Warning: This will delete /root/system_tools.sh${NC}"
+                echo -ne "【${RED}Confirm uninstall?${NC}】【${GREEN}y${NC}/${RED}n${NC}】: "
+                read -r confirm
+                if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+                    rm -f /root/system_tools.sh
+                    sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
+                    echo -e "【${GREEN}Script uninstalled successfully.${NC}】"
+                    exit 0
+                else
+                    echo -e "【${YELLOW}Uninstall cancelled.${NC}】"
+                fi
+            fi
+            ;;	
         00)
             exit_script
             ;;
