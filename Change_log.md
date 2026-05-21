@@ -58,3 +58,8 @@
 
 -----------------------------------------------------------------------------------------------------------------------------
 【v2.4】 Fourteenth Edition, fixed three critical errors when creating new ssh and docker ip scripts, including errors in network name retrieval, container name retrieval, and the ipset address set service. The script author has migrated to the new iptsh.com website. Fixed issues with invalid display colors in several details. (2025.05.06 PM)
+
+-----------------------------------------------------------------------------------------------------------------------------
+【v2.5】 Fifteenth Edition, fixed an error caused by sudo in the screen tool code, added uninstall script menu option, and also removes the shortcut when uninstalling the script. (2026.05.21 PM)
+
+-----------------------------------------------------------------------------------------------------------------------------
