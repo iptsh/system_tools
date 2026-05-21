@@ -2466,7 +2466,7 @@ while true; do
 					rm -f /usr/local/bin/s
                     sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
                     echo -e "【${GREEN}脚本已成功卸载。${NC}】"
-                    exit 0
+                    exec bash
                 else
                     echo -e "【${YELLOW}已取消卸载。${NC}】"
                 fi
@@ -2479,7 +2479,7 @@ while true; do
 					rm -f /usr/local/bin/s
                     sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
                     echo -e "【${GREEN}Script uninstalled successfully.${NC}】"
-                    exit 0
+                    exec bash
                 else
                     echo -e "【${YELLOW}Uninstall cancelled.${NC}】"
                 fi
