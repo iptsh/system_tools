@@ -2463,6 +2463,7 @@ while true; do
                 read -r confirm
                 if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
                     rm -f /root/system_tools.sh
+					rm -f /usr/local/bin/s
                     sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
                     echo -e "【${GREEN}脚本已成功卸载。${NC}】"
                     exit 0
@@ -2475,6 +2476,7 @@ while true; do
                 read -r confirm
                 if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
                     rm -f /root/system_tools.sh
+					rm -f /usr/local/bin/s
                     sed -i '/alias s=.*system_tools/d' /root/.bashrc 2>/dev/null
                     echo -e "【${GREEN}Script uninstalled successfully.${NC}】"
                     exit 0
