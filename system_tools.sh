@@ -2456,7 +2456,7 @@ while true; do
         20)
             view_change_log
             ;;
-		99)
+        99)
             if [ "$LANGUAGE" = "CN" ]; then
                 echo -e "${RED}警告：此操作将删除脚本文件 /root/system_tools.sh${NC}"
                 echo -ne "【${RED}是否确认卸载脚本？${NC}】【${GREEN}y${NC}/${RED}n${NC}】："
