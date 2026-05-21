@@ -1,6 +1,6 @@
 ### 【Script Introduction】【English】【[简体中文](./README.zh-cn.md)】
 
-![2 4e](https://github.com/user-attachments/assets/6565ba17-282e-4312-b3bf-ad11adfc1225)
+<img width="700" height="455" alt="屏幕截图_20260521_104121" src="https://github.com/user-attachments/assets/08528af8-5b86-424d-9a0c-1cebfa1ed6cb" />
 
 ### 【Detailed Update Log for the Script】【[Change log](./Change_log.md)】
 ### 【Installation & Usage】
